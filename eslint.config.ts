@@ -9,7 +9,7 @@ export default [
     ...ts.configs.recommended,
     {
         ...a11y.flatConfigs.recommended,
-        files: ["**/*.{astro,svelte}"]
+        files: ["**/*.{astro,svelte}"],
     },
     ...astro.configs["flat/jsx-a11y-recommended"].map((config) => {
         delete config?.plugins?.["jsx-a11y"];
@@ -27,15 +27,15 @@ export default [
             "import/first": "error",
             "import/newline-after-import": "error",
             "import/no-duplicates": "error",
-        }   
+        },
     },
     // sort destructured keys
     {
         plugins: {
-            sort: sortDestructureKeys
+            sort: sortDestructureKeys,
         },
         rules: {
             "sort/sort-destructure-keys": "error",
-        }
-    }
+        },
+    },
 ];

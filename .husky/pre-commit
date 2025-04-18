@@ -1,2 +1,3 @@
-pnpm lint --fix
+pnpm lint --fix --quiet
+pnpm format --log-level silent
 git add .
