@@ -1,7 +1,12 @@
 ---
+import CurrentSong from "@/components/CurrentSong.svelte";
 import Layout from "@/pages/Layout.astro";
+import { fetchSong } from "@/utils";
+
+const song = await fetchSong(Astro.url.origin);
 ---
 
 <Layout>
     <h1 class="text-2xl">hi</h1>
+    <CurrentSong {song} client:load />
 </Layout>

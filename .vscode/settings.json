@@ -4,5 +4,12 @@
         ".astro": true,
         ".vercel": true,
         "dist": true
-    }
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "always"
+    },
+    "prettier.documentSelectors": ["**/*.astro"],
+    "eslint.validate": ["astro", "typescript", "javascript"]
 }

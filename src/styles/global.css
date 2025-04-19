@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+:root {
+    --animate-spin: spin 3s linear infinite;
+}
