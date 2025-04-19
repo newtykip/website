@@ -4,6 +4,8 @@ import svelte from "@astrojs/svelte";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 import expressiveCode from "./config/expressiveCode";
 
@@ -13,6 +15,12 @@ const previewBuild = process.env.PREVIEW !== undefined;
 export default defineConfig({
     adapter: previewBuild ? node({ mode: "standalone" }) : vercel(),
     integrations: [svelte(), expressiveCode(), mdx()],
+
+    markdown: {
+        rehypePlugins: [rehypeKatex],
+        remarkPlugins: [remarkMath],
+    },
+
     output: "server",
     site: "https://newty.dev",
 

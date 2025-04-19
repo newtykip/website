@@ -1,4 +1,6 @@
 ---
+import "@/styles/blog.css";
+
 import type { GetStaticPathsItem } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection, render } from "astro:content";
@@ -31,3 +33,7 @@ const { Content } = await render(post);
     <h1 class="text-2xl" set:html={title} />
     <Content />
 </Layout>
+
+<script>
+    import "katex/dist/contrib/copy-tex.min.js";
+</script>
