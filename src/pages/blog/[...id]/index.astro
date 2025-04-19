@@ -1,0 +1,33 @@
+---
+import type { GetStaticPathsItem } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { marked } from "marked";
+
+import Layout from "@/Layout.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    const paths: GetStaticPathsItem[] = posts
+        .filter((post) => (import.meta.env.PROD ? post.data.published : true))
+        .map((post) => {
+            const { id } = post;
+            return { params: { id }, props: post };
+        });
+    return paths;
+}
+
+type Props = CollectionEntry<"blog">;
+const post = Astro.props;
+const { data } = post;
+
+const title = marked(data.title);
+const { Content } = await render(post);
+---
+
+<Layout {post}>
+    <h1 class="text-2xl" set:html={title} />
+    <Content />
+</Layout>

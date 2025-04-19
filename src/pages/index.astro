@@ -2,10 +2,10 @@
 import "@/styles/index.css";
 
 import type { Song } from "@/api/song";
-import CurrentSong from "@/components/CurrentSong.svelte";
-import Donation from "@/components/Donation.astro";
+import CurrentSong from "@/components/index/CurrentSong.svelte";
+import Donation from "@/components/index/Donation.astro";
 import { DUMMY } from "@/consts";
-import Layout from "@/pages/Layout.astro";
+import Layout from "@/Layout.astro";
 import { fetchApi } from "@/utils";
 
 const song = import.meta.env.PROD
