@@ -3,12 +3,15 @@ import "@/styles/global.css";
 
 import type { CollectionEntry } from "astro:content";
 
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
+
 interface Props {
     post?: CollectionEntry<"blog">;
 }
 ---
 
-<html lang="en">
+<html lang="en" data-theme="catppuccin-latte">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -16,7 +19,31 @@ interface Props {
         <meta name="generator" content={Astro.generator} />
         <title>{Astro.site!.host}</title>
     </head>
-    <body>
-        <slot />
+    <body class="flex flex-col bg-base min-h-screen text-text">
+        <Navbar />
+        <main class="flex-grow mx-auto mt-5 w-3/5">
+            <slot />
+        </main>
+        <Footer />
     </body>
 </html>
+
+<script>
+    import { theme } from "@/stores/theme";
+
+    // set default theme if not set
+    if (!theme.get()) {
+        theme.set(
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "mocha"
+                : "latte",
+        );
+    }
+
+    theme.subscribe(async (theme) => {
+        document.documentElement.setAttribute(
+            "data-theme",
+            `catppuccin-${theme}`,
+        );
+    });
+</script>

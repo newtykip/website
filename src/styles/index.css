@@ -1,4 +1,8 @@
-@reference "@/styles/global.css";
+@reference "tailwindcss";
+
+:root {
+    --animate-spin: spin 3s linear infinite;
+}
 
 .stat {
     @apply flex items-center gap-1;

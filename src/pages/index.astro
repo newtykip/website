@@ -4,6 +4,7 @@ import "@/styles/index.css";
 import type { Song } from "@/api/song";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.astro";
+import Theme from "@/components/Theme.svelte";
 import { DUMMY } from "@/consts";
 import Layout from "@/Layout.astro";
 import { fetchApi } from "@/utils";
@@ -19,4 +20,5 @@ const song = import.meta.env.PROD
         <li><CurrentSong {song} client:load /></li>
         <li><Donation /></li>
     </ul>
+    <Theme client:only="svelte" />
 </Layout>
