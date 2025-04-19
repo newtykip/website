@@ -10,6 +10,6 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "always"
     },
-    "prettier.documentSelectors": ["**/*.astro"],
-    "eslint.validate": ["astro", "typescript", "javascript"]
+    "prettier.documentSelectors": ["**/*.astro", "**/*.svelte"],
+    "eslint.validate": ["astro", "svelte", "typescript", "javascript"]
 }

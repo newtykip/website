@@ -4,8 +4,11 @@ import a11y from "eslint-plugin-jsx-a11y";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 import sortKeys from "eslint-plugin-sort-keys-fix";
+import svelte from "eslint-plugin-svelte";
 import tsSortKeys from "eslint-plugin-typescript-sort-keys";
 import ts from "typescript-eslint";
+
+import svelteConfig from "./svelte.config.ts";
 
 export default [
     // typescript-eslint
@@ -23,6 +26,19 @@ export default [
         delete config?.plugins?.["jsx-a11y"];
         return config;
     }),
+    // svelte
+    ...svelte.configs.recommended,
+    {
+        files: ["**/*.svelte"],
+        languageOptions: {
+            parserOptions: {
+                extraFileExtensions: [".svelte"],
+                parser: ts.parser,
+                projectService: true,
+                svelteConfig,
+            },
+        },
+    },
     // imports
     {
         plugins: {
