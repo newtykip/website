@@ -1,0 +1,13 @@
+@reference "@/styles/global.css";
+
+.stat {
+    @apply flex items-center gap-1;
+
+    img {
+        @apply rounded-full w-6 h-6;
+    }
+
+    a {
+        @apply mb-0.5 leading-none;
+    }
+}

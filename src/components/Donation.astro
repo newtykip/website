@@ -1,0 +1,14 @@
+---
+import type { Donation } from "@/api/donation";
+import redis from "@/redis";
+
+const donation = await redis.get<Donation>("donation");
+const { amount, avatar, currency, id, name } = donation!;
+---
+
+<span class="stat">
+    <img src={avatar} alt={name} />
+    <a href={`https://ko-fi.com/home/coffeeshop?txid=${id}`}>
+        {name} ({currency}{amount})
+    </a>
+</span>

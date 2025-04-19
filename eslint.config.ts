@@ -6,6 +6,7 @@ import sortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 import sortKeys from "eslint-plugin-sort-keys-fix";
 import svelte from "eslint-plugin-svelte";
 import tsSortKeys from "eslint-plugin-typescript-sort-keys";
+import unusedImports from "eslint-plugin-unused-imports";
 import ts from "typescript-eslint";
 
 import svelteConfig from "./svelte.config.ts";
@@ -39,18 +40,30 @@ export default [
             },
         },
     },
-    // imports
+    // imports and allow _ prefixed variables
     {
         plugins: {
             import: importPlugin,
             simpleImportSort,
+            unusedImports,
         },
         rules: {
+            "@typescript-eslint/no-unused-vars": "off",
             "import/first": "error",
             "import/newline-after-import": "error",
             "import/no-duplicates": "error",
             "simpleImportSort/exports": "error",
             "simpleImportSort/imports": "error",
+            "unusedImports/no-unused-imports": "error",
+            "unusedImports/no-unused-vars": [
+                "error",
+                {
+                    args: "after-used",
+                    argsIgnorePattern: "^_",
+                    vars: "all",
+                    varsIgnorePattern: "^_",
+                },
+            ],
         },
     },
     // sort object keys
@@ -71,23 +84,6 @@ export default [
         },
         rules: {
             "sortDestructureKeys/sort-destructure-keys": "error",
-        },
-    },
-    // allow unused variables prefixed with _
-    {
-        rules: {
-            "@typescript-eslint/no-unused-vars": [
-                "error",
-                {
-                    args: "all",
-                    argsIgnorePattern: "^_",
-                    caughtErrors: "all",
-                    caughtErrorsIgnorePattern: "^_",
-                    destructuredArrayIgnorePattern: "^_",
-                    ignoreRestSiblings: true,
-                    varsIgnorePattern: "^_",
-                },
-            ],
         },
     },
 ];

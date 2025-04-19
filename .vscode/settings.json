@@ -11,5 +11,8 @@
         "source.fixAll.eslint": "always"
     },
     "prettier.documentSelectors": ["**/*.astro", "**/*.svelte"],
-    "eslint.validate": ["astro", "svelte", "typescript", "javascript"]
+    "eslint.validate": ["astro", "svelte", "typescript", "javascript"],
+    "files.associations": {
+        "*.css": "tailwindcss"
+    }
 }

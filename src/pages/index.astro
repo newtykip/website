@@ -1,12 +1,19 @@
 ---
-import CurrentSong from "@/components/CurrentSong.svelte";
-import Layout from "@/pages/Layout.astro";
-import { fetchSong } from "@/utils";
+import "@/styles/index.css";
 
-const song = await fetchSong(Astro.url.origin);
+import type { Song } from "@/api/song";
+import CurrentSong from "@/components/CurrentSong.svelte";
+import Donation from "@/components/Donation.astro";
+import Layout from "@/pages/Layout.astro";
+import { fetchApi } from "@/utils";
+
+const song = await fetchApi<Song>("song", Astro);
 ---
 
 <Layout>
     <h1 class="text-2xl">hi</h1>
-    <CurrentSong {song} client:load />
+    <ul class="*:mb-1">
+        <li><CurrentSong {song} client:load /></li>
+        <li><Donation /></li>
+    </ul>
 </Layout>

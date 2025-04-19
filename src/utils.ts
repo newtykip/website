@@ -1,9 +1,14 @@
 import { decode } from "@msgpack/msgpack";
+import type { AstroGlobal } from "astro";
 
-import type { Song } from "@/pages/api/song";
-
-export async function fetchSong(baseUrl = ""): Promise<Song> {
-    return (await fetch(`${baseUrl}/api/song`)
+/**
+ * Fetches data from the API and decodes it using msgpack.
+ */
+export async function fetchApi<T>(
+    endpoint: string,
+    Astro: AstroGlobal | undefined = undefined,
+): Promise<T> {
+    return (await fetch(`${Astro ? Astro.url.origin : ""}/api/${endpoint}`)
         .then((res) => res.arrayBuffer())
-        .then(decode)) as Song;
+        .then(decode)) as T;
 }

@@ -1,12 +1,13 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "env.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "esModuleInterop": true
-  }
+    "extends": "astro/tsconfigs/strict",
+    "include": [".astro/types.d.ts", "env.d.ts", "**/*"],
+    "exclude": ["dist"],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"],
+            "@/api/*": ["./src/pages/api/*"]
+        },
+        "esModuleInterop": true
+    }
 }
