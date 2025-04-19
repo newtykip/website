@@ -5,14 +5,15 @@ import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
+import expressiveCode from "./config/expressiveCode";
+
 const previewBuild = process.env.PREVIEW !== undefined;
 
 // https://astro.build/config
 export default defineConfig({
     adapter: previewBuild ? node({ mode: "standalone" }) : vercel(),
-    integrations: [svelte(), mdx()],
+    integrations: [svelte(), expressiveCode(), mdx()],
     output: "server",
-
     site: "https://newty.dev",
 
     vite: {
