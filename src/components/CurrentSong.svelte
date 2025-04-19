@@ -10,13 +10,15 @@
     const { song: initialSong }: Props = $props();
     let song = $state(initialSong);
 
-    $effect(() => {
-        const interval = setInterval(
-            async () => (song = await fetchApi("song")),
-            INTERVAL.SONG,
-        );
-        return () => clearInterval(interval);
-    });
+    if (import.meta.env.PROD) {
+        $effect(() => {
+            const interval = setInterval(
+                async () => (song = await fetchApi("song")),
+                INTERVAL.SONG,
+            );
+            return () => clearInterval(interval);
+        });
+    }
 </script>
 
 {#if song !== undefined}

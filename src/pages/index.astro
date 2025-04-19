@@ -4,10 +4,13 @@ import "@/styles/index.css";
 import type { Song } from "@/api/song";
 import CurrentSong from "@/components/CurrentSong.svelte";
 import Donation from "@/components/Donation.astro";
+import { DUMMY } from "@/consts";
 import Layout from "@/pages/Layout.astro";
 import { fetchApi } from "@/utils";
 
-const song = await fetchApi<Song>("song", Astro);
+const song = import.meta.env.PROD
+    ? await fetchApi<Song>("song", Astro)
+    : DUMMY.SONG;
 ---
 
 <Layout>

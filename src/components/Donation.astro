@@ -1,8 +1,16 @@
 ---
 import type { Donation } from "@/api/donation";
+import { DUMMY } from "@/consts";
 import redis from "@/redis";
 
-const donation = await redis.get<Donation>("donation");
+let donation: Donation | null = null;
+if (import.meta.env.PROD) {
+    donation = await redis.get<Donation>("donation");
+}
+if (!donation) {
+    donation = DUMMY.DONATION;
+}
+
 const { amount, avatar, currency, id, name } = donation!;
 ---
 
