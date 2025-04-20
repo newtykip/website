@@ -9,6 +9,7 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
 import expressiveCode from "./config/expressiveCode";
+import remarkReadingTime from "./plugins/remarkReadingTime";
 
 const previewBuild = process.env.PREVIEW !== undefined;
 
@@ -19,7 +20,7 @@ export default defineConfig({
 
     markdown: {
         rehypePlugins: [rehypeKatex],
-        remarkPlugins: [remarkMath],
+        remarkPlugins: [remarkMath, remarkReadingTime],
     },
 
     output: "server",

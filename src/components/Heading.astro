@@ -1,38 +1,50 @@
 ---
+import * as cheerio from "cheerio";
+
+import Underline from "@/components/Underline.astro";
+
 interface Props {
     anchor?: boolean | string;
     class?: string;
-    content: string;
     level?: number;
 }
 
-const { anchor = true, class: clazz = "", content, level = 1 } = Astro.props;
+const { anchor = true, class: clazz = "", level = 1 } = Astro.props;
 
+const content = cheerio.load(await Astro.slots.render("default")).text();
 const anchorTag =
     typeof anchor === "string"
         ? anchor
-        : content
-              .toLowerCase()
-              .replaceAll(/[^a-z0-9- ]/g, "")
-              .replaceAll(" ", "-");
+        : anchor
+          ? content
+                .toLowerCase()
+                .replaceAll(/[^a-z0-9- ]/g, "")
+                .replaceAll(" ", "-")
+          : null;
 
 let classes = ["font-semibold", `h${level}`, ...clazz.split(" ")];
 ---
 
 <div id={anchorTag} class:list={classes}>
     {
-        anchor ? (
+        anchorTag ? (
             <a href={`#${anchorTag}`} class="group relative">
                 <span class="text-lavender select-none">
                     {"#".repeat(level)}
                 </span>
-                <span class="group inline-block relative">
-                    {content}
-                    <span class="bottom-0 left-0 absolute bg-lavender w-full h-0.5 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200" />
-                </span>
+                <Underline>
+                    <slot />
+                </Underline>
             </a>
         ) : (
-            content
+            <div class="group relative cursor-default">
+                <span class="text-lavender select-none">
+                    {"#".repeat(level)}
+                </span>
+                <Underline>
+                    <slot />
+                </Underline>
+            </div>
         )
     }
 </div>

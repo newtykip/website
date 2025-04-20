@@ -1,1 +1,6 @@
 @import "katex/dist/katex.min.css";
+@reference "tailwindcss";
+
+.stat {
+    @apply flex items-center gap-1;
+}

@@ -17,4 +17,13 @@ export default () =>
             "catppuccin-macchiato",
             "catppuccin-mocha",
         ],
+        styleOverrides: {
+            codeBackground: "var(--mantle)",
+            codeFontFamily: "var(--font-mono)",
+            uiFontFamily: "var(--font-sans)",
+            frames: {
+                tooltipSuccessBackground: "var(--green)",
+                tooltipSuccessForeground: "#000000",
+            },
+        },
     });

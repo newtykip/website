@@ -5,17 +5,21 @@
 }
 
 .stat {
-    @apply flex items-center gap-2 font-mono;
+    @apply flex items-center gap-2 font-mono min-w-0;
 
     img {
         @apply rounded-full w-6 h-6;
     }
 
     a {
-        @apply mb-0.5 leading-none;
+        @apply mb-0.5 leading-none flex-grow truncate;
     }
 }
 
 .h1 {
     @apply text-2xl;
+}
+
+.h2 {
+    @apply text-xl;
 }

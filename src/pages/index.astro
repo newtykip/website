@@ -35,21 +35,29 @@ const song = await fetchApi<Song>("song", Astro);
     </div>
 
     <div>
-        <Heading content="Hello!" class="text-2xl" />
+        <Heading class="text-2xl">Hello</Heading>
         <p>
             The name's newt - I'm an {age} year old Computing Science student at
             the University of Glasgow.
         </p>
 
-        <ul class="*:flex *:gap-2 my-2 *:mb-1">
+        <ul class="*:flex *:items-center *:gap-2 my-2 *:mb-1">
             <li>
-                <Icon name="mdi:spotify" class="text-2xl" />
+                <Icon
+                    name="mdi:spotify"
+                    class="hidden md:block flex-none text-2xl"
+                />
                 <CurrentSong {song} client:load />
             </li>
             <li>
-                <Icon name="simple-icons:kofi" class="text-2xl" />
+                <Icon
+                    name="simple-icons:kofi"
+                    class="hidden md:block flex-none text-2xl"
+                />
                 <Donation />
             </li>
         </ul>
     </div>
+
+    <Heading>Yes</Heading>
 </Layout>

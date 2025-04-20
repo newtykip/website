@@ -1,0 +1,93 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import { marked } from "marked";
+
+import Icon from "@/components/Icon.astro";
+import { formatDate } from "@/utils";
+
+interface Props {
+    featured?: boolean;
+    post: CollectionEntry<"blog">;
+}
+
+const { featured = false, post } = Astro.props;
+const { data, id } = post;
+const { hero = `/blog/${id}.webp`, heroAlt, published, tags } = data;
+
+const {
+    remarkPluginFrontmatter: { minutesRead },
+} = await render(post);
+
+const title = marked(data.title);
+const description = data.description ? marked(data.description) : "";
+---
+
+<article
+    {id}
+    class="group bg-mantle shadow-md hover:shadow-xl mb-8 border border-surface0 rounded-xl overflow-hidden transition hover:-translate-y-0.5 duration-300 ease-in-out hover:cursor-pointer"
+>
+    <img
+        src={hero}
+        alt={heroAlt ?? ""}
+        loading="lazy"
+        class:list={[
+            "w-full",
+            "object-cover",
+            featured ? "md:aspect-[3/1]" : null,
+            "aspect-[3/2]",
+        ]}
+    />
+    <div class="flex justify-between p-6">
+        <div>
+            <h2
+                set:html={title}
+                class="mb-2 font-semibold group-hover:text-mauve text-2xl transition-colors"
+            />
+            <div
+                set:html={description}
+                class="mb-4 text-text text-sm leading-relaxed"
+            />
+            <ul class="flex flex-wrap gap-2">
+                {
+                    tags.map((tag) => (
+                        <li>
+                            <a
+                                href={`/blog/tag/${tag}`}
+                                class="inline-block bg-surface0 hover:bg-mauve px-3 py-1 rounded-full text-subtext1 text-xs hover:text-base transition-colors"
+                            >
+                                #{tag}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <ul
+            class="hidden md:flex flex-col flex-shrink-0 items-end gap-x-4 gap-y-1 mt-2 text-subtext0 text-sm"
+        >
+            <li class="flex items-center gap-1.5">
+                <span>{formatDate(published!)}</span>
+                <Icon name="lucide:calendar" class="size-4" />
+            </li>
+            <li class="flex items-center gap-1.5">
+                <span>{minutesRead}</span>
+                <Icon name="lucide:clock" class="size-4" />
+            </li>
+            <li class="flex items-center gap-1.5">
+                <span>1 view</span>
+                <Icon name="lucide:eye" class="size-4" />
+            </li>
+        </ul>
+    </div>
+</article>
+
+<script>
+    document.querySelectorAll("article").forEach((article) => {
+        const id = article.getAttribute("id");
+        article.addEventListener("click", () => {
+            window.location.href = `/blog/${id}`;
+        });
+    });
+</script>

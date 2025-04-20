@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 
 import type { CollectionEntry } from "astro:content";
+import removeMarkdown from "remove-markdown";
 
 import Footer from "@/components/layout/Footer.astro";
 import Navbar from "@/components/layout/Navbar.astro";
@@ -11,6 +12,8 @@ interface Props {
     post?: CollectionEntry<"blog">;
 }
 
+const { post } = Astro.props;
+const title = post ? removeMarkdown(post.data.title) : Astro.site!.host;
 const clazz = Astro.props.class?.split(" ") ?? [];
 ---
 
@@ -20,7 +23,9 @@ const clazz = Astro.props.class?.split(" ") ?? [];
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>{Astro.site!.host}</title>
+        <title>
+            {title}
+        </title>
     </head>
     <body class="flex flex-col bg-base min-h-screen text-text">
         <Navbar />
@@ -31,6 +36,7 @@ const clazz = Astro.props.class?.split(" ") ?? [];
                 "flex-grow",
                 "mx-auto",
                 "mt-5",
+                "mb-8",
                 "w-3/5",
                 ...clazz,
             ]}
