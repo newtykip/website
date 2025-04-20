@@ -29,7 +29,6 @@ export async function GET(_: APIContext) {
         .then((res) => res?.["recenttracks"]["track"][0])
         .then((track): Song => {
             const images = track?.image;
-            console.log(images[images.length - 1]);
             return {
                 albumName: track?.album["#text"],
                 artist: track?.artist["#text"],
@@ -52,10 +51,11 @@ export async function GET(_: APIContext) {
         .then((res) => res.tracks.items[0]);
 
     // if the artists don't match, we have to disregard spotify data
-    const artistMatch = spotify.artists.some(
-        (spotifyArtist) =>
-            spotifyArtist.name.toLowerCase() === artist.toLowerCase(),
-    );
+    const artistMatch =
+        spotify?.artists.some(
+            (spotifyArtist) =>
+                spotifyArtist.name.toLowerCase() === artist.toLowerCase(),
+        ) || false;
 
     let payload: Song;
 

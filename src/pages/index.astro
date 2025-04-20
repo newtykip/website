@@ -11,23 +11,13 @@ import RandomAccent from "@/components/RandomAccent.svelte";
 import Layout from "@/Layout.astro";
 import { fetchApi } from "@/utils";
 
-const birthDate = new Date("2006-06-06");
-const today = new Date();
-const age =
-    today.getFullYear() -
-    birthDate.getFullYear() -
-    (today <
-    new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate())
-        ? 1
-        : 0);
-
 const song = await fetchApi<Song>("song", Astro);
 ---
 
 <Layout class="*:flex *:flex-col gap-4 *:gap-2">
     <div class="!flex-row items-center !gap-4">
         <RandomAccent client:only="svelte">
-            <h1 class="font-semibold text-4xl cursor-pointer">
+            <h1 class="font-semibold text-4xl cursor-pointer select-none">
                 {Astro.site!.host}
             </h1>
         </RandomAccent>
@@ -35,13 +25,32 @@ const song = await fetchApi<Song>("song", Astro);
     </div>
 
     <div>
-        <Heading class="text-2xl">Hello</Heading>
+        <Heading>Welcome to my website</Heading>
         <p>
-            The name's newt - I'm an {age} year old Computing Science student at
-            the University of Glasgow.
+            Hey there! The name's newt, and I'm an avid software engineer,
+            computer scientist, and system administrator. I'm currently working
+            towards a BSc in Computing Science.
         </p>
 
-        <ul class="*:flex *:items-center *:gap-2 my-2 *:mb-1">
+        <p>
+            I'm currently working on
+            <span class="font-medium text-mauve">amethyst</span>, the next
+            generation of game server hosting. We're a small team with big
+            amibitions - if you feel you've got something to bring to the table,
+            or just want to find out more, we want to hear from you. No resumes
+            or CVs, just reach out to me on
+            <span data-obfuscation="0">newt@playamethyst.com</span>
+        </p>
+
+        <p>
+            I like to share my experiences and opinions on my blog. In the
+            future, I will share further details about
+            <span class="font-medium text-mauve">amethyst</span> and my experiences
+            running a business. You can check it out
+            <a class="text-lavender link" href="/blog">here</a>.
+        </p>
+
+        <ul class="*:flex *:items-center *:gap-2 my-2 *:mb-1 select-none">
             <li>
                 <Icon
                     name="mdi:spotify"
@@ -58,6 +67,23 @@ const song = await fetchApi<Song>("song", Astro);
             </li>
         </ul>
     </div>
-
-    <Heading>Yes</Heading>
+    <div>
+        <Heading>Get in touch</Heading>
+        <p>
+            I will respond quickest on <Icon
+                name="ic:baseline-discord"
+                class="inline-block"
+            />, but you can reach me through any of the following:
+        </p>
+        <ul class="*:mb-1 list-disc">
+            <li>
+                <Icon name="lucide:mail" />
+                <span data-obfuscation="0">hi@newty.dev</span>
+            </li>
+            <li>
+                <Icon name="ic:baseline-discord" />
+                <span data-obfuscation="0">isitreallyalive</span>
+            </li>
+        </ul>
+    </div>
 </Layout>

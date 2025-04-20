@@ -16,6 +16,10 @@
     }
 }
 
+li {
+    @apply flex gap-2 items-center;
+}
+
 .h1 {
     @apply text-2xl;
 }

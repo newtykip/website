@@ -10,3 +10,11 @@
     --font-sans: "Outfit Variable", sans-serif;
     --font-mono: "JetBrains Mono Variable", monospace;
 }
+
+a.link {
+    @apply hover:text-mauve;
+}
+
+[data-obfuscation] {
+    @apply font-mono bg-mantle text-sm select-none;
+}
