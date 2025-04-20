@@ -7,8 +7,11 @@ import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar.astro";
 
 interface Props {
+    class?: string;
     post?: CollectionEntry<"blog">;
 }
+
+const clazz = Astro.props.class?.split(" ") ?? [];
 ---
 
 <html lang="en" data-theme="catppuccin-latte">
@@ -21,7 +24,17 @@ interface Props {
     </head>
     <body class="flex flex-col bg-base min-h-screen text-text">
         <Navbar />
-        <main class="flex-grow mx-auto mt-5 w-3/5">
+        <main
+            class:list={[
+                "flex",
+                "flex-col",
+                "flex-grow",
+                "mx-auto",
+                "mt-5",
+                "w-3/5",
+                ...clazz,
+            ]}
+        >
             <slot />
         </main>
         <Footer />
@@ -29,21 +42,21 @@ interface Props {
 </html>
 
 <script>
-    import { theme } from "@/stores/theme";
+    import flavor from "@/stores/flavor";
 
-    // set default theme if not set
-    if (!theme.get()) {
-        theme.set(
+    // set default flavor if not set
+    if (!flavor.get()) {
+        flavor.set(
             window.matchMedia("(prefers-color-scheme: dark)").matches
                 ? "mocha"
                 : "latte",
         );
     }
 
-    theme.subscribe(async (theme) => {
+    flavor.subscribe(async (flavor) => {
         document.documentElement.setAttribute(
             "data-theme",
-            `catppuccin-${theme}`,
+            `catppuccin-${flavor}`,
         );
     });
 </script>

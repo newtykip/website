@@ -6,7 +6,8 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"],
-            "@/api/*": ["./src/pages/api/*"]
+            "@/api/*": ["./src/pages/api/*"],
+            "@/content/*": ["./content/*"]
         },
         "esModuleInterop": true
     }

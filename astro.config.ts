@@ -4,6 +4,7 @@ import svelte from "@astrojs/svelte";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import icon from "astro-icon";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
@@ -14,7 +15,7 @@ const previewBuild = process.env.PREVIEW !== undefined;
 // https://astro.build/config
 export default defineConfig({
     adapter: previewBuild ? node({ mode: "standalone" }) : vercel(),
-    integrations: [svelte(), expressiveCode(), mdx()],
+    integrations: [svelte(), expressiveCode(), mdx(), icon()],
 
     markdown: {
         rehypePlugins: [rehypeKatex],

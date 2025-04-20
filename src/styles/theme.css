@@ -3,6 +3,9 @@
 
 @theme initial {
     --color-*: initial;
+    --color-white: #ffffff;
+    --color-black: #000000;
+
     --color-rosewater: var(--rosewater);
     --color-flamingo: var(--flamingo);
     --color-pink: var(--pink);

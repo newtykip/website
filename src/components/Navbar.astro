@@ -1,0 +1,16 @@
+---
+import Theme from "@/components/Theme.svelte";
+---
+
+<nav class="bg-mantle py-3 select-none">
+    <div class="flex items-center mx-auto w-3/5">
+        <a href="/">
+            <!-- <Image src={head} alt="newty.dev" height={32} width={32} /> -->
+        </a>
+        <div class="flex flex-grow justify-end gap-6">
+            <a href="/">home</a>
+            <a href="/blog">blog</a>
+            <Theme client:only="svelte" />
+        </div>
+    </div>
+</nav>

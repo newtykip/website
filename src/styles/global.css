@@ -1,2 +1,15 @@
 @import "tailwindcss";
 @import "@/styles/theme.css";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/jetbrains-mono";
+
+@source inline("text-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender}");
+
+@theme {
+    --font-sans: "Outfit Variable", sans-serif;
+    --font-mono: "JetBrains Mono Variable", monospace;
+}
+
+a {
+    @apply hover:text-lavender;
+}
