@@ -5,7 +5,7 @@
 }
 
 .stat {
-    @apply flex items-center gap-1;
+    @apply flex items-center gap-2 font-mono;
 
     img {
         @apply rounded-full w-6 h-6;
@@ -14,4 +14,8 @@
     a {
         @apply mb-0.5 leading-none;
     }
+}
+
+.h1 {
+    @apply text-2xl;
 }

@@ -24,7 +24,12 @@
 {#if song !== undefined}
     <span class="stat">
         <img src={song.icon} class="animate-spin" alt={song.albumName} />
-        <a href={song.url} target="_blank" rel="noopener noreferrer">
+        <a
+            href={song.url}
+            class="hover:text-green"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
             {song.artist.toLowerCase()} - {song.name.toLowerCase()}
         </a>
     </span>

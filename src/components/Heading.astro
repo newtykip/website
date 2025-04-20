@@ -1,0 +1,38 @@
+---
+interface Props {
+    anchor?: boolean | string;
+    class?: string;
+    content: string;
+    level?: number;
+}
+
+const { anchor = true, class: clazz = "", content, level = 1 } = Astro.props;
+
+const anchorTag =
+    typeof anchor === "string"
+        ? anchor
+        : content
+              .toLowerCase()
+              .replaceAll(/[^a-z0-9- ]/g, "")
+              .replaceAll(" ", "-");
+
+let classes = ["font-semibold", `h${level}`, ...clazz.split(" ")];
+---
+
+<div id={anchorTag} class:list={classes}>
+    {
+        anchor ? (
+            <a href={`#${anchorTag}`} class="group relative">
+                <span class="text-lavender select-none">
+                    {"#".repeat(level)}
+                </span>
+                <span class="group inline-block relative">
+                    {content}
+                    <span class="bottom-0 left-0 absolute bg-lavender w-full h-0.5 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200" />
+                </span>
+            </a>
+        ) : (
+            content
+        )
+    }
+</div>

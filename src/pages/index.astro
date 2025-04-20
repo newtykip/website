@@ -2,18 +2,54 @@
 import "@/styles/index.css";
 
 import type { Song } from "@/api/song";
+import Heading from "@/components/Heading.astro";
+import Icon from "@/components/Icon.astro";
+import Cat from "@/components/index/Cat.svelte";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.astro";
+import RandomAccent from "@/components/RandomAccent.svelte";
 import Layout from "@/Layout.astro";
 import { fetchApi } from "@/utils";
+
+const birthDate = new Date("2006-06-06");
+const today = new Date();
+const age =
+    today.getFullYear() -
+    birthDate.getFullYear() -
+    (today <
+    new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate())
+        ? 1
+        : 0);
 
 const song = await fetchApi<Song>("song", Astro);
 ---
 
-<Layout class="gap-4">
-    <h1 class="font-semibold text-4xl">{Astro.site!.host}</h1>
-    <ul class="*:mb-1 *:font-medium">
-        <li><CurrentSong {song} client:load /></li>
-        <li><Donation /></li>
-    </ul>
+<Layout class="*:flex *:flex-col gap-4 *:gap-2">
+    <div class="!flex-row items-center !gap-4">
+        <RandomAccent client:only="svelte">
+            <h1 class="font-semibold text-4xl cursor-pointer">
+                {Astro.site!.host}
+            </h1>
+        </RandomAccent>
+        <Cat client:only="svelte" />
+    </div>
+
+    <div>
+        <Heading content="Hello!" class="text-2xl" />
+        <p>
+            The name's newt - I'm an {age} year old Computing Science student at
+            the University of Glasgow.
+        </p>
+
+        <ul class="*:flex *:gap-2 my-2 *:mb-1">
+            <li>
+                <Icon name="mdi:spotify" class="text-2xl" />
+                <CurrentSong {song} client:load />
+            </li>
+            <li>
+                <Icon name="simple-icons:kofi" class="text-2xl" />
+                <Donation />
+            </li>
+        </ul>
+    </div>
 </Layout>
