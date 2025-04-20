@@ -15,31 +15,34 @@ const spotifyClient = new SpotifyAPI({
 export interface Song {
     albumName?: string;
     artist: string;
-    icon: string;
+    image: string;
     name: string;
     url: string;
 }
 
 export async function GET(_: APIContext) {
     // fetch the most recent track from Last.fm
-    const { artist, name } = await fetch(
+    const lastfm = await fetch(
         `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAMES.LASTFM}&api_key=${LASTFM_SECRET}&format=json&limit=1`,
     )
         .then((res) => res.json())
         .then((res) => res?.["recenttracks"]["track"][0])
-        .then((track) => {
+        .then((track): Song => {
+            const images = track?.image;
+            console.log(images[images.length - 1]);
             return {
-                artist: track?.artist["#text"] || "",
-                name: track?.name || "",
+                albumName: track?.album["#text"],
+                artist: track?.artist["#text"],
+                image: images?.[images.length - 1]["#text"],
+                name: track?.name,
+                url: track?.url,
             };
         });
+    const { artist } = lastfm;
 
     // find the track on Spotify for more relevant information
-    const {
-        album: { images, name: albumName },
-        external_urls: { spotify: url },
-    } = await spotifyClient.search
-        .get(`artist:${artist} ${name}`, {
+    const spotify = await spotifyClient.search
+        .get(`artist:${artist} ${lastfm.name}`, {
             include: {
                 track: true,
             },
@@ -47,18 +50,33 @@ export async function GET(_: APIContext) {
             market: "GB",
         })
         .then((res) => res.tracks.items[0]);
-    const icon = images[images.length - 1].url;
 
-    // reply
-    const payload = encode({
-        albumName,
-        artist,
-        icon,
-        name,
-        url,
-    } satisfies Song);
+    // if the artists don't match, we have to disregard spotify data
+    const artistMatch = spotify.artists.some(
+        (spotifyArtist) =>
+            spotifyArtist.name.toLowerCase() === artist.toLowerCase(),
+    );
 
-    return new Response(payload, {
+    let payload: Song;
+
+    if (!artistMatch) {
+        payload = lastfm;
+    } else {
+        const {
+            album: { images, name: albumName },
+        } = spotify;
+        const image = images[images.length - 1].url;
+
+        payload = {
+            albumName,
+            artist: lastfm.artist,
+            image,
+            name: spotify.name,
+            url: spotify.external_urls.spotify,
+        };
+    }
+
+    return new Response(encode(payload), {
         headers: {
             "Content-Type": "application/x-msgpack",
         },
