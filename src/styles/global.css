@@ -4,12 +4,9 @@
 @import "@fontsource-variable/jetbrains-mono";
 
 @source inline("text-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender}");
+@source inline("hover:text-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender}");
 
 @theme {
     --font-sans: "Outfit Variable", sans-serif;
     --font-mono: "JetBrains Mono Variable", monospace;
-}
-
-a {
-    @apply hover:text-lavender;
 }

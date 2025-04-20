@@ -1,0 +1,74 @@
+---
+import type { AccentName } from "@catppuccin/palette";
+
+import Icon from "@/components/Icon.astro";
+import Time from "@/components/layout/Time.svelte";
+import Webring from "@/components/layout/Webring.svelte";
+import { USERNAMES } from "@/consts";
+
+interface Link {
+    colour: AccentName;
+    href: string;
+    icon: string;
+}
+
+const links: Link[] = [
+    {
+        colour: "maroon",
+        href: `https://git.redstone.observer/${USERNAMES.GITLAB}`,
+        icon: "lucide:gitlab",
+    },
+    {
+        colour: "peach",
+        href: `https://ko-fi.com/${USERNAMES.KOFI}`,
+        icon: "simple-icons:kofi",
+    },
+    {
+        colour: "green",
+        href: `https://modinth.com/user/${USERNAMES.MODRINTH}`,
+        icon: "simple-icons:modrinth",
+    },
+];
+const colourTransition = ["transition-colors", "duration-200", "ease-in-out"];
+---
+
+<footer class="bg-mantle py-8 select-none">
+    <div class="flex flex-col items-center gap-6 mx-auto w-1/2">
+        <div class="flex justify-around w-full">
+            {
+                links.map(({ colour, href, icon: name }) => (
+                    <a
+                        {href}
+                        target="_blank"
+                        rel="noopener"
+                        class:list={[
+                            `hover:text-${colour}`,
+                            ...colourTransition,
+                        ]}
+                    >
+                        <Icon name={name} class="text-2xl" />
+                    </a>
+                ))
+            }
+        </div>
+
+        <ul class="flex flex-col items-center list-none">
+            <li class="flex items-center gap-1">
+                made with <Icon
+                    name="mdi:heart"
+                    class="hover:text-red cursor-pointer"
+                /> by newt
+            </li>
+            <li class="text-subtext0">
+                <Time client:only="svelte" />
+            </li>
+            <li class="*:hover:text-lavender *:hover:underline">
+                <a href="/ack">acknowledements</a> •
+                <a href="/privacy">privacy</a> •
+                <a href="/rss.xml">rss</a>
+            </li>
+        </ul>
+
+        <Webring client:only="svelte" />
+    </div>
+</footer>

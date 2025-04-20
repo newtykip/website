@@ -1,6 +1,5 @@
 {
     "files.exclude": {
-        // "node_modules": true,
         ".astro": true,
         ".vercel": true,
         "dist": true

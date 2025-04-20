@@ -1,45 +1,21 @@
 <script lang="ts">
-    import { type AccentName, flavorEntries } from "@catppuccin/palette";
+    import { flavorEntries } from "@catppuccin/palette";
     import Icon from "@iconify/svelte";
 
+    import RandomAccent from "@/components/RandomAccent.svelte";
     import flavor from "@/stores/flavor";
 
-    const accents: AccentName[] = [
-        "rosewater",
-        "flamingo",
-        "pink",
-        "mauve",
-        "red",
-        "maroon",
-        "peach",
-        "yellow",
-        "green",
-        "teal",
-        "sky",
-        "sapphire",
-        "blue",
-        "lavender",
-    ];
-
     let open = $state(false);
-    let accent: AccentName | "text" = $state("text");
 </script>
 
 <div class="relative">
     <button
         onclick={() => (open = !open)}
-        onmouseenter={() =>
-            (accent = accents[Math.floor(Math.random() * accents.length)])}
-        onmouseleave={() => (accent = "text")}
-        class={[
-            "absolute",
-            "inset-0",
-            "mt-0.5",
-            "cursor-pointer",
-            `text-${accent}`,
-        ]}
+        class="absolute inset-0 mt-0.5 cursor-pointer"
     >
-        <Icon icon="lucide:palette" class="text-xl" />
+        <RandomAccent>
+            <Icon icon="lucide:palette" class="text-xl" />
+        </RandomAccent>
     </button>
 
     {#if open}
