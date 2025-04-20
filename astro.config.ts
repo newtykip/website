@@ -4,12 +4,14 @@ import svelte from "@astrojs/svelte";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import autoImport from "astro-auto-import";
 import icon from "astro-icon";
 import mailObfuscation from "astro-mail-obfuscation";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
 import expressiveCode from "./config/expressiveCode";
+import rehypeHeadings from "./plugins/rehypeHeadings";
 import remarkReadingTime from "./plugins/remarkReadingTime";
 
 const previewBuild = process.env.PREVIEW !== undefined;
@@ -19,6 +21,9 @@ export default defineConfig({
     adapter: previewBuild ? node({ mode: "standalone" }) : vercel(),
     integrations: [
         svelte(),
+        autoImport({
+            imports: ["@/components/Heading.astro"],
+        }),
         expressiveCode(),
         mdx(),
         icon(),
@@ -26,7 +31,7 @@ export default defineConfig({
     ],
 
     markdown: {
-        rehypePlugins: [rehypeKatex],
+        rehypePlugins: [rehypeKatex, rehypeHeadings],
         remarkPlugins: [remarkMath, remarkReadingTime],
     },
 

@@ -18,3 +18,11 @@ a.link {
 [data-obfuscation] {
     @apply font-mono bg-mantle text-sm select-none;
 }
+
+.h1 {
+    @apply text-2xl;
+}
+
+.h2 {
+    @apply text-xl;
+}

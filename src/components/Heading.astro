@@ -11,7 +11,9 @@ interface Props {
 
 const { anchor = true, class: clazz = "", level = 1 } = Astro.props;
 
-const content = cheerio.load(await Astro.slots.render("default")).text();
+const content = cheerio
+    .load((await Astro.slots.render("default")) || "")
+    .text();
 const anchorTag =
     typeof anchor === "string"
         ? anchor

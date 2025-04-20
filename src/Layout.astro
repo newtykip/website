@@ -66,3 +66,26 @@ const clazz = Astro.props.class?.split(" ") ?? [];
         );
     });
 </script>
+
+<script>
+    function enableSmoothScroll() {
+        const root = document.querySelector(":root");
+        if (!root) return stop();
+        root.classList.toggle("not-motion-reduce:scroll-smooth");
+    }
+
+    // check if there is an anchor in the URL
+    const hash = window.location.hash;
+
+    if (hash) {
+        // if there is, immediately scroll to the top of the page
+        window.scrollTo(0, 0);
+
+        // and then scroll to the anchor
+        enableSmoothScroll();
+        const target = document.querySelector(hash);
+        setTimeout(() => target?.scrollIntoView(), 200);
+    } else {
+        enableSmoothScroll();
+    }
+</script>
