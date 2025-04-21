@@ -45,6 +45,9 @@ export default defineConfig({
     site: "https://newty.dev",
 
     vite: {
+        css: {
+            transformer: "lightningcss",
+        },
         plugins: [tailwindcss()],
         server: {
             allowedHosts: [".ngrok-free.app"],

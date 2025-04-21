@@ -1,6 +1,5 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
-import Astro from "astro.config";
 import removeMarkdown from "remove-markdown";
 
 import { DESCRIPTION } from "@/consts";
@@ -20,6 +19,6 @@ export async function GET(context: APIContext) {
             title: removeMarkdown(title),
         })),
         site: context.site as URL,
-        title: new URL(Astro.site!).host,
+        title: "newty.dev",
     });
 }
