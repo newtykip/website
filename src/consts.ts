@@ -1,6 +1,6 @@
 import type { Donation } from "@/pages/api/donation";
 
-export const DESCRIPTION = "";
+export const DESCRIPTION = "18 y/o developer based in Scotland";
 
 export const USERNAMES = {
     GITLAB: "newt",
