@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import BlogPost from "@/components/blog/BlogPost.astro";
+
+interface Props {
+    posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+const featured = posts.shift()!;
+---
+
+<div class="mt-4">
+    <BlogPost post={featured} featured />
+</div>
+<div class="gap-x-8 gap-y-4 grid lg:grid-cols-2 my-8">
+    {posts.map((post) => <BlogPost {post} />)}
+</div>

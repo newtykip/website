@@ -1,0 +1,33 @@
+---
+import PostCollection from "@/components/blog/PostCollection.astro";
+import Heading from "@/components/Heading.astro";
+import Layout from "@/Layout.astro";
+import { getPosts } from "@/utils/server";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    const posts = await getPosts(false);
+    const tags = new Set<string>();
+    posts.forEach((post) => {
+        post.data.tags.forEach((tag) => tags.add(tag));
+    });
+    const paths = Array.from(tags).map((tag) => {
+        return { params: { tag } };
+    });
+    return paths;
+}
+
+const { tag: target } = Astro.params;
+const allPosts = await getPosts();
+const posts = allPosts.filter((post) => {
+    return post.data.tags.some((tag) => tag === target);
+});
+---
+
+<Layout>
+    <Heading class="my-2 !text-3xl align-middle" anchor={false}>
+        {target}
+    </Heading>
+    <PostCollection {posts} />
+</Layout>
