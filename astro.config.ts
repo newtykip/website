@@ -5,14 +5,16 @@ import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import autoImport from "astro-auto-import";
+import compressor from "astro-compressor";
 import icon from "astro-icon";
 import mailObfuscation from "astro-mail-obfuscation";
+import min from "astro-min";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
-import expressiveCode from "./config/expressiveCode";
-import rehypeHeadings from "./plugins/rehypeHeadings";
-import remarkReadingTime from "./plugins/remarkReadingTime";
+import expressiveCode from "./src/config/expressiveCode";
+import rehypeHeadings from "./src/plugins/rehypeHeadings";
+import remarkReadingTime from "./src/plugins/remarkReadingTime";
 
 const previewBuild = process.env.PREVIEW !== undefined;
 
@@ -28,6 +30,8 @@ export default defineConfig({
         icon(),
         mailObfuscation(),
         mdx(),
+        min(),
+        compressor(),
     ],
 
     markdown: {

@@ -77,6 +77,9 @@ importers:
       astro-auto-import:
         specifier: ^0.4.4
         version: 0.4.4(astro@5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1))
+      astro-compressor:
+        specifier: ^1.0.0
+        version: 1.0.0
       astro-expressive-code:
         specifier: ^0.41.1
         version: 0.41.1(astro@5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1))
@@ -86,6 +89,9 @@ importers:
       astro-mail-obfuscation:
         specifier: ^2.3.4
         version: 2.3.4(astro@5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1))
+      astro-min:
+        specifier: ^1.3.1
+        version: 1.3.1(astro@5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1))
       cheerio:
         specifier: ^1.0.0
         version: 1.0.0
@@ -797,6 +803,21 @@ packages:
   '@mdx-js/mdx@3.1.0':
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
 
+  '@minify-html/node-darwin-x64@0.15.0':
+    resolution: {integrity: sha512-D9M9UDku/8I5VEMS0gTLFFQK1DFXK8io+QZvR5cbya4u8NmdDQix/t3EyCR4Wgv/Gfk86gwIS+zfMSvuKcpb5A==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@minify-html/node-linux-x64@0.15.0':
+    resolution: {integrity: sha512-cO893EV6O9ZHUFX+2Yge546OCo/eCiatjzJDmUmrPP56fQ7pzTRquHs4ko3t8Rg6tMKG7RT49mBuF09JWPnrgg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@minify-html/node-win32-x64@0.15.0':
+    resolution: {integrity: sha512-n92IFdtntchlUtyrq13pRI8TT3sOddbzuo4EPTSeocuTJMXaR77v0JYDu0fIjxXNawgGq6nBEeicxAcH4CbvUQ==}
+    cpu: [x64]
+    os: [win32]
+
   '@msgpack/msgpack@3.1.1':
     resolution: {integrity: sha512-DnBpqkMOUGayNVKyTLlkM6ILmU/m/+VUxGkuQlPQVAcvreLz5jn1OlQnWd8uHKL/ZSiljpM12rjRhr51VtvJUQ==}
     engines: {node: '>= 18'}
@@ -829,6 +850,11 @@ packages:
   '@pkgr/core@0.2.4':
     resolution: {integrity: sha512-ROFF39F6ZrnzSUEmQQZUar0Jt4xVoP9WnDRdWwF4NNcXs3xBTLgBUDoOwW141y1jP+S8nahIbdxbFC7IShw9Iw==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@redwerkz/html-min@0.15.1':
+    resolution: {integrity: sha512-Kwi6DSoOKI6q2oyt0kVTfWOBcQHBychE1BvOEyVF/j+nJjjRxEWvA0b0wx+p9ovM46P8CHD/8Y3lptYiAteZrQ==}
+    engines: {node: '>= 18.17.1'}
+    hasBin: true
 
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
@@ -1383,6 +1409,9 @@ packages:
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
 
+  astro-compressor@1.0.0:
+    resolution: {integrity: sha512-MNGRmjIsb73BIJivbU/HnTbPu5CEFvXp1NCev0bpsuK/cp4cCPX6C1omUPXzw2oQbtKv0phTTTtEk+h20SrF1Q==}
+
   astro-eslint-parser@1.2.2:
     resolution: {integrity: sha512-JepyLROIad6f44uyqMF6HKE2QbunNzp3mYKRcPoDGt0QkxXmH222FAFC64WTyQu2Kg8NNEXHTN/sWuUId9sSxw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1400,6 +1429,11 @@ packages:
     engines: {node: '>=18.17.1'}
     peerDependencies:
       astro: '>=4.0.0'
+
+  astro-min@1.3.1:
+    resolution: {integrity: sha512-TvHT24cGygf+h47WVrSxaF/6vUwJ8s+TlmwkKlNHNDqRmW5FNiUHspZnEwLsaHTtVGZWZN4NMSVPoD5oLyyrmQ==}
+    peerDependencies:
+      astro: '*'
 
   astro@5.7.4:
     resolution: {integrity: sha512-h+pndGOyoYbsBd0YvP7bL3gotUSlyltp8OLpcYg062w0n5c96wJ9xt/RmwwXzGbdcUjWFtw0c5z4zCA92NDmlA==}
@@ -4835,6 +4869,15 @@ snapshots:
       - acorn
       - supports-color
 
+  '@minify-html/node-darwin-x64@0.15.0':
+    optional: true
+
+  '@minify-html/node-linux-x64@0.15.0':
+    optional: true
+
+  '@minify-html/node-win32-x64@0.15.0':
+    optional: true
+
   '@msgpack/msgpack@3.1.1': {}
 
   '@nanostores/persistent@1.0.0(nanostores@1.0.1)':
@@ -4859,6 +4902,12 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.2.4': {}
+
+  '@redwerkz/html-min@0.15.1':
+    optionalDependencies:
+      '@minify-html/node-darwin-x64': 0.15.0
+      '@minify-html/node-linux-x64': 0.15.0
+      '@minify-html/node-win32-x64': 0.15.0
 
   '@rollup/pluginutils@5.1.4(rollup@4.40.0)':
     dependencies:
@@ -5421,6 +5470,8 @@ snapshots:
       acorn: 8.14.1
       astro: 5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1)
 
+  astro-compressor@1.0.0: {}
+
   astro-eslint-parser@1.2.2:
     dependencies:
       '@astrojs/compiler': 2.11.0
@@ -5458,6 +5509,12 @@ snapshots:
       cheerio: 1.0.0
       globby: 14.1.0
       p-limit: 6.2.0
+
+  astro-min@1.3.1(astro@5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1)):
+    dependencies:
+      '@redwerkz/html-min': 0.15.1
+      astro: 5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1)
+      svgo: 3.3.2
 
   astro@5.7.4(@types/node@22.14.1)(@upstash/redis@1.34.8)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(sass-embedded@1.86.3)(typescript@5.8.3)(yaml@2.7.1):
     dependencies:
