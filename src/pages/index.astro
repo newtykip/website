@@ -17,7 +17,7 @@ const song = await fetchApi<Song>("song", Astro);
 <Layout class="*:flex *:flex-col gap-4 *:gap-2">
     <div class="!flex-row items-center !gap-4">
         <RandomAccent client:only="svelte">
-            <h1 class="font-semibold text-4xl cursor-pointer select-none">
+            <h1 class="cursor-pointer select-none title">
                 {Astro.site!.host}
             </h1>
         </RandomAccent>
@@ -25,7 +25,7 @@ const song = await fetchApi<Song>("song", Astro);
     </div>
 
     <div>
-        <Heading>Welcome to my website</Heading>
+        <Heading slug={false}>Welcome to my website</Heading>
         <p>
             Hey there! The name's newt, and I'm an avid software engineer,
             computer scientist, and system administrator. I'm currently working
@@ -47,7 +47,7 @@ const song = await fetchApi<Song>("song", Astro);
             future, I will share further details about
             <span class="font-medium text-mauve">amethyst</span> and my experiences
             running a business. You can check it out
-            <a class="text-lavender link" href="/blog">here</a>.
+            <a href="/blog">here</a>.
         </p>
 
         <ul class="*:flex *:items-center *:gap-2 my-2 *:mb-1 select-none">
@@ -68,14 +68,14 @@ const song = await fetchApi<Song>("song", Astro);
         </ul>
     </div>
     <div>
-        <Heading>Get in touch</Heading>
+        <Heading slug="contact">Get in touch</Heading>
         <p>
             I will respond quickest on <Icon
                 name="ic:baseline-discord"
                 class="inline-block"
             />, but you can reach me through any of the following:
         </p>
-        <ul class="*:mb-1 list-disc">
+        <ul class="*:mb-1">
             <li>
                 <Icon name="lucide:mail" />
                 <span data-obfuscation="0">hi@newty.dev</span>

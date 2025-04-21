@@ -1,5 +1,6 @@
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
+import partytown from "@astrojs/partytown";
 import svelte from "@astrojs/svelte";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
@@ -28,6 +29,7 @@ export default defineConfig({
         }),
         expressiveCode(),
         icon(),
+        partytown(),
         mailObfuscation(),
         mdx(),
         min(),

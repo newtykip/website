@@ -1,6 +1,5 @@
 ---
 import PostCollection from "@/components/blog/PostCollection.astro";
-import Heading from "@/components/Heading.astro";
 import Layout from "@/Layout.astro";
 import { getPosts } from "@/utils/server";
 
@@ -10,6 +9,6 @@ const posts = await getPosts();
 ---
 
 <Layout>
-    <Heading class="my-2 !text-3xl" slug={false}>Blog</Heading>
+    <h1 class="my-2 title">Blog</h1>
     <PostCollection {posts} />
 </Layout>

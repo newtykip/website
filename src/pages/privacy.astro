@@ -1,0 +1,70 @@
+---
+import Heading from "@/components/Heading.astro";
+import Layout from "@/Layout.astro";
+
+export const prerender = true;
+---
+
+<Layout class="*:flex *:flex-col gap-8 *:gap-2">
+    <div>
+        <h1 class="title">Privacy</h1>
+        <p>
+            Your privacy is important to me. Here's how I handle data on this
+            website.
+        </p>
+    </div>
+    <div>
+        <Heading>Data collection</Heading>
+        <p>
+            I use a self-hosted instance of <a href="https://umami.is">umami</a>
+            to gather basic website analytics. This lets me understand how people
+            use the site so I can improve its content and functionality.
+        </p>
+    </div>
+    <div>
+        <Heading>What I collect</Heading>
+        <p>
+            umami only collects <span class="font-semibold">anonymous</span> data.
+            This means I do not track or store any personally identifiable information
+            (PII) such as names, email addresses, IP addresses. The data collected
+            is limited to general usage patterns, like:
+        </p>
+        <ul class="list-disc">
+            <li>Pages viewed</li>
+            <li>Time spent on each page</li>
+            <li>Referring websites</li>
+        </ul>
+    </div>
+    <div>
+        <Heading>Public dashboard</Heading>
+        <p>
+            For transparency, the analytics dashboard for this website is
+            publicly available, so you can view the same data I use to analyze
+            website usage. You can find the relevant links below:
+        </p>
+        <ul class="list-disc">
+            <li>
+                <a
+                    href="https://analytics.redstone.observer/share/nBo2HeQo9Pufldw8/newty.dev"
+                >
+                    newty.dev
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <Heading>Third-party access</Heading>
+        <p>
+            Since the instance of umami is self-hosted, no third-party companies
+            or advertisers have access to the data collected on this site.
+        </p>
+    </div>
+    <div>
+        <Heading>Contact</Heading>
+        <p>
+            If you have any questions or concerns about this policy, please feel
+            free to reach out through any means listed in my
+            <a href="/#contact">contact section</a>.
+        </p>
+    </div>
+</Layout>

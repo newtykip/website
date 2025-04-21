@@ -30,7 +30,7 @@ let classes = ["font-semibold", `h${level}`, ...clazz.split(" ")];
 <div id={parsedSlug} class:list={classes}>
     {
         slug ? (
-            <a href={`#${parsedSlug}`} class="group relative">
+            <a href={`#${parsedSlug}`} class="group relative !text-text">
                 <span class="text-lavender select-none">
                     {"#".repeat(level)}
                 </span>

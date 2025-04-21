@@ -9,7 +9,7 @@ import sharp from "sharp";
 
 import Footer from "@/components/layout/Footer.astro";
 import Navbar from "@/components/layout/Navbar.astro";
-import { DESCRIPTION, USERNAMES } from "@/consts";
+import { DESCRIPTION, UMAMI, USERNAMES } from "@/consts";
 import { formatDate } from "@/utils";
 
 interface Props {
@@ -79,6 +79,16 @@ if (post) {
         />
         <meta name="generator" content={Astro.generator} />
         <link rel="canonical" href={canonicalURL} />
+
+        {
+            import.meta.env.PROD ? (
+                <script
+                    type="text/partytown"
+                    src={`${UMAMI.URL}/script.js`}
+                    data-website-id={UMAMI.ID}
+                />
+            ) : null
+        }
 
         <SEO {title} {description} {openGraph} {twitter} charset="utf-8" />
 

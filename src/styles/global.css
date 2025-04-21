@@ -11,8 +11,8 @@
     --font-mono: "JetBrains Mono Variable", monospace;
 }
 
-a.link {
-    @apply hover:text-mauve;
+a {
+    @apply hover:text-mauve text-lavender;
 }
 
 [data-obfuscation] {
@@ -25,4 +25,14 @@ a.link {
 
 .h2 {
     @apply text-xl;
+}
+
+.title {
+    @apply font-semibold text-4xl;
+}
+
+ul.list-disc {
+    li {
+        @apply ml-4 *:mb-2;
+    }
 }

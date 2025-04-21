@@ -1,6 +1,5 @@
 ---
 import PostCollection from "@/components/blog/PostCollection.astro";
-import Heading from "@/components/Heading.astro";
 import Layout from "@/Layout.astro";
 import { getPosts } from "@/utils/server";
 
@@ -26,8 +25,8 @@ const posts = allPosts.filter((post) => {
 ---
 
 <Layout>
-    <Heading class="my-2 !text-3xl align-middle" slug={false}>
-        {target}
-    </Heading>
+    <h1 class="my-2 title">
+        #{target}
+    </h1>
     <PostCollection {posts} />
 </Layout>
