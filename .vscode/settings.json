@@ -2,7 +2,8 @@
     "files.exclude": {
         ".astro": true,
         ".vercel": true,
-        "dist": true
+        "dist": true,
+        "node_modules": true
     },
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",

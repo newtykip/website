@@ -14,7 +14,7 @@ interface Props {
 
 const { featured = false, post } = Astro.props;
 const { data, id } = post;
-const { hero = `/blog/${id}.webp`, heroAlt, published, tags } = data;
+const { hero = `/hero/${id}.webp`, heroAlt, published, tags } = data;
 
 const {
     remarkPluginFrontmatter: { minutesRead },

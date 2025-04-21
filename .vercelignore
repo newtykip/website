@@ -1,1 +1,8 @@
+.husky
+.vscode
+.astro
+.prettierrc
+eslint.config.ts
+pnpm-workspace.yaml
 dist
+src/build/scripts

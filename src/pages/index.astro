@@ -1,15 +1,15 @@
 ---
 import "@/styles/index.css";
 
-import type { Song } from "@/api/song";
+import Accent from "@/components/Accent.svelte";
 import Heading from "@/components/Heading.astro";
 import Icon from "@/components/Icon.astro";
 import Cat from "@/components/index/Cat.svelte";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.astro";
-import RandomAccent from "@/components/RandomAccent.svelte";
 import { DISCORD_ID, SIGNAL_URL, USERNAMES } from "@/consts";
 import Layout from "@/Layout.astro";
+import type { Song } from "@/pages/api/song";
 import { fetchApi } from "@/utils";
 
 const song = await fetchApi<Song>("song", Astro);
@@ -17,11 +17,11 @@ const song = await fetchApi<Song>("song", Astro);
 
 <Layout class="*:flex *:flex-col gap-4 *:gap-2">
     <div class="!flex-row items-center !gap-4">
-        <RandomAccent client:only="svelte">
+        <Accent client:only="svelte">
             <h1 class="cursor-pointer select-none title">
                 {Astro.site!.host}
             </h1>
-        </RandomAccent>
+        </Accent>
         <Cat client:only="svelte" />
     </div>
 
@@ -70,10 +70,9 @@ const song = await fetchApi<Song>("song", Astro);
     <div>
         <Heading slug="contact">Get in touch</Heading>
         <p>
-            I will respond quickest on <Icon
-                name="ic:baseline-discord"
-                class="inline-block"
-            />, but you can reach me through any of the following:
+            I will respond quickest on
+            <Icon name="ic:baseline-discord" class="inline-block" />, but you
+            can reach me through any of the following:
         </p>
         <ul class="*:mb-1">
             <li>

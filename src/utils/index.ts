@@ -6,7 +6,7 @@ import type { AstroGlobal } from "astro";
  */
 export async function fetchApi<T>(
     endpoint: string,
-    Astro: AstroGlobal | undefined = undefined,
+    Astro?: AstroGlobal,
 ): Promise<T> {
     return (await fetch(`${Astro ? Astro.url.origin : ""}/api/${endpoint}`)
         .then((res) => res.arrayBuffer())

@@ -3,7 +3,7 @@
     import Icon from "@iconify/svelte";
     import { onMount } from "svelte";
 
-    import RandomAccent from "@/components/RandomAccent.svelte";
+    import Accent from "@/components/Accent.svelte";
     import flavor from "@/stores/flavor";
 
     let open = $state(false);
@@ -27,9 +27,9 @@
         onclick={() => (open = !open)}
         class="absolute inset-0 mt-0.5 cursor-pointer"
     >
-        <RandomAccent>
+        <Accent>
             <Icon icon="lucide:palette" class="text-xl" />
-        </RandomAccent>
+        </Accent>
     </button>
 
     {#if open}
