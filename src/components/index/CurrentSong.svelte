@@ -26,10 +26,10 @@
         <img src={song.image} class="animate-spin" alt={song.albumName} />
         <a
             href={song.url}
-            class="hover:text-green"
+            class="text-text hover:!text-green"
             target="_blank"
             rel="noopener noreferrer"
-            >{song.artist.toLowerCase()} - {song.name.toLowerCase()}
+            >{song.artist} - {song.name}
         </a>
     </span>
 {/if}

@@ -12,7 +12,11 @@
 }
 
 a {
-    @apply hover:text-mauve text-lavender;
+    @apply hover:text-mauve;
+}
+
+a:not(.text-text) {
+    @apply text-lavender hover:text-mauve;
 }
 
 [data-obfuscation] {

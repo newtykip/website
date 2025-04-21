@@ -21,9 +21,11 @@
 
     interface Props {
         children: Snippet;
+        class?: string;
     }
 
-    const { children }: Props = $props();
+    const { children, class: clazz }: Props = $props();
+    const classList = clazz?.split(" ") ?? [];
     let accent: AccentName | "text" = $state("text");
 </script>
 
@@ -33,7 +35,7 @@
     onmouseenter={() =>
         (accent = accents[Math.floor(Math.random() * accents.length)])}
     onmouseleave={() => (accent = "text")}
-    class="text-{accent}"
+    class={[`text-${accent}`, ...classList]}
 >
     {@render children()}
 </span>

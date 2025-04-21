@@ -10,18 +10,15 @@
             <Icon icon="lucide:arrow-left" class="text-xl" />
         </RandomAccent>
     </a>
-    <a
-        href="https://ctp-webr.ing"
-        class="flex items-center gap-2"
-        target="_blank"
-        rel="noopener"
-    >
-        <img
-            src="/catppuccin.png"
-            alt="Catppuccin logo"
-            class="mt-0.5 w-6 h-6"
-        />
-        <RandomAccent>catppuccin webring :3</RandomAccent>
+    <a href="https://ctp-webr.ing" target="_blank" rel="noopener">
+        <RandomAccent class="flex items-center gap-2">
+            <img
+                src="/catppuccin.png"
+                alt="Catppuccin logo"
+                class="mt-0.5 w-6 h-6"
+            />
+            catppuccin webring :3
+        </RandomAccent>
     </a>
     <a href="https://ctp-webr.ing/newt/next" class="mt-0.5">
         <RandomAccent>
