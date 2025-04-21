@@ -1,10 +1,13 @@
 import type { Donation } from "@/pages/api/donation";
 
+export const DESCRIPTION = "";
+
 export const USERNAMES = {
     GITLAB: "newt",
     KOFI: "isitreallyalive",
     LASTFM: "newtykip",
     MODRINTH: "newty",
+    TWITTER: "isitreallyalive",
 };
 
 const SECOND = 1000;

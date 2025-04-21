@@ -2,10 +2,15 @@
 import "@/styles/global.css";
 
 import type { CollectionEntry } from "astro:content";
+import { type Props as AstroSEO, SEO } from "astro-seo";
+import fs from "fs/promises";
 import removeMarkdown from "remove-markdown";
+import sharp from "sharp";
 
 import Footer from "@/components/layout/Footer.astro";
 import Navbar from "@/components/layout/Navbar.astro";
+import { DESCRIPTION, USERNAMES } from "@/consts";
+import { formatDate } from "@/utils";
 
 interface Props {
     class?: string;
@@ -13,16 +18,70 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const title = post ? removeMarkdown(post.data.title) : Astro.site!.host;
+
 const clazz = Astro.props.class?.split(" ") ?? [];
+
+// SEO
+const title = post ? removeMarkdown(post.data.title) : Astro.site!.host;
+const description = post ? removeMarkdown(post.data.description!) : DESCRIPTION;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const image = `${Astro.site}blog/${post?.id || "introduction"}.webp`;
+const imageMeta = await sharp(
+    await fs.readFile(`public/blog/${post?.id || "introduction"}.webp`),
+).metadata()!;
+const openGraph: AstroSEO["openGraph"] = {
+    basic: {
+        image,
+        title,
+        type: post ? "article" : "website",
+    },
+    image: {
+        alt: post?.data.heroAlt,
+        height: imageMeta?.height,
+        type: imageMeta?.format,
+        width: imageMeta?.width,
+    },
+    optional: {
+        description,
+        locale: "en_GB",
+        siteName: Astro.site?.toString(),
+    },
+};
+const twitter: AstroSEO["twitter"] = {
+    card: "summary_large_image",
+    creator: `@${USERNAMES.TWITTER}`,
+    description,
+    image,
+    imageAlt: post?.data.heroAlt,
+    site: `@${USERNAMES.TWITTER}`,
+    title,
+};
+if (post) {
+    openGraph.article = {
+        authors: ["newt"],
+        publishedTime: formatDate(post.data.published!),
+        section: "Technology",
+        tags: post.data.tags,
+    };
+}
 ---
 
 <html lang="en" data-theme="catppuccin-latte">
     <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title={Astro.site?.toString()}
+            href={new URL("rss.xml", Astro.site)}
+        />
         <meta name="generator" content={Astro.generator} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <SEO {title} {description} {openGraph} {twitter} charset="utf-8" />
+
         <title>
             {title}
         </title>
