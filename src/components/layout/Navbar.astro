@@ -1,11 +1,14 @@
 ---
+import { Image } from "astro:assets";
+
 import Theme from "@/components/layout/Theme.svelte";
+import head from "@/images/head.png";
 ---
 
-<nav class="bg-mantle py-3 select-none">
+<nav class="bg-mantle py-2 select-none">
     <div class="flex items-center mx-auto w-3/5">
         <a href="/">
-            <!-- <Image src={head} alt="newty.dev" height={32} width={32} /> -->
+            <Image src={head} alt={Astro.site!.host} />
         </a>
         <div class="flex flex-grow justify-end gap-6 *:!text-text">
             <a href="/">home</a>

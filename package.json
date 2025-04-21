@@ -11,7 +11,8 @@
         "astro": "astro",
         "lint": "eslint src/**/*.{astro,ts,svelte} *.{mjs,ts}",
         "format": "prettier src/**/*.{astro,ts,svelte,css} *.{mjs,ts,config.ts} --write",
-        "prepare": "husky"
+        "prepare": "husky",
+        "assets": "tsx src/scripts/assets.ts"
     },
     "dependencies": {
         "@astrojs/mdx": "^4.2.4",
@@ -86,6 +87,7 @@
         "prettier-plugin-astro": "^0.14.1",
         "prettier-plugin-svelte": "^3.3.3",
         "sass-embedded": "^1.86.3",
+        "tsx": "^4.19.3",
         "typescript-eslint": "^8.30.1"
     }
 }
