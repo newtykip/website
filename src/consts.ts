@@ -21,6 +21,7 @@ export const USERNAMES = {
 export const DISCORD_ID = "1269669249056510026";
 export const SIGNAL_URL =
     "https://signal.me/#eu/oI2LyHYNd0E7j5OTZ3DEZe5vuwF0CNcemU5K7l-X_BaIbnw1bRZFC5-rRVELppxs";
+export const HOMESERVER = "redstone.observer";
 
 const SECOND = 1000;
 

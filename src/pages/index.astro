@@ -7,7 +7,7 @@ import Icon from "@/components/Icon.astro";
 import Cat from "@/components/index/Cat.svelte";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.astro";
-import { DISCORD_ID, SIGNAL_URL, USERNAMES } from "@/consts";
+import { DISCORD_ID, HOMESERVER, SIGNAL_URL, USERNAMES } from "@/consts";
 import Layout from "@/Layout.astro";
 import type { Song } from "@/pages/api/song";
 import { fetchApi } from "@/utils";
@@ -50,44 +50,53 @@ const song = await fetchApi<Song>("song", Astro);
             <a href="/blog">here</a>.
         </p>
 
-        <ul class="*:flex *:items-center *:gap-2 my-2 *:mb-1 select-none">
-            <li>
-                <Icon
-                    name="mdi:spotify"
-                    class="hidden md:block flex-none text-2xl"
-                />
-                <CurrentSong {song} client:load />
-            </li>
-            <li>
-                <Icon
-                    name="simple-icons:kofi"
-                    class="hidden md:block flex-none text-2xl"
-                />
-                <Donation />
-            </li>
-        </ul>
-    </div>
-    <div>
-        <Heading slug="contact">Get in touch</Heading>
         <p>
-            I will respond quickest on
-            <Icon name="ic:baseline-discord" class="inline-block" />, but you
-            can reach me through any of the following:
+            I host a bunch of services off of my home server @
+            <a href={`https://${HOMESERVER}`}>redstone.observer</a> including my
+            own GitLab instance. You can find the source to this website on
+            <a href=`https://git.${HOMESERVER}`>git.redstone.observer</a> @
+            <a href=`https://git.${HOMESERVER}/newt/website`>newt/website</a>.
+
+            <ul class="*:flex *:items-center *:gap-2 my-2 *:mb-1 select-none">
+                <li>
+                    <Icon
+                        name="mdi:spotify"
+                        class="hidden md:block flex-none text-2xl"
+                    />
+                    <CurrentSong {song} client:load />
+                </li>
+                <li>
+                    <Icon
+                        name="simple-icons:kofi"
+                        class="hidden md:block flex-none text-2xl"
+                    />
+                    <Donation />
+                </li>
+            </ul>
         </p>
-        <ul class="*:mb-1">
-            <li>
-                <Icon name="ic:baseline-discord" class="hover:text-mauve" />
-                <a
-                    href={`https://discord.com/users/${DISCORD_ID}`}
-                    class="text-text"
-                >
-                    {USERNAMES.DISCORD}
-                </a>
-            </li>
-            <li>
-                <Icon name="simple-icons:signal" class="hover:text-blue" />
-                <a href={SIGNAL_URL} class="text-text">{USERNAMES.SIGNAL}</a>
-            </li>
-        </ul>
+        <div>
+            <Heading slug="contact">Get in touch</Heading>
+            <p>
+                I will respond quickest on
+                <Icon name="ic:baseline-discord" class="inline-block" />, but
+                you can reach me through any of the following:
+            </p>
+            <ul class="mt-2 *:mb-1">
+                <li>
+                    <Icon name="ic:baseline-discord" class="hover:text-mauve" />
+                    <a
+                        href={`https://discord.com/users/${DISCORD_ID}`}
+                        class="text-text"
+                    >
+                        {USERNAMES.DISCORD}
+                    </a>
+                </li>
+                <li>
+                    <Icon name="simple-icons:signal" class="hover:text-blue" />
+                    <a href={SIGNAL_URL} class="text-text">{USERNAMES.SIGNAL}</a
+                    >
+                </li>
+            </ul>
+        </div>
     </div>
 </Layout>
