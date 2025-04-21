@@ -8,7 +8,6 @@ import { defineConfig } from "astro/config";
 import autoImport from "astro-auto-import";
 import compressor from "astro-compressor";
 import icon from "astro-icon";
-import mailObfuscation from "astro-mail-obfuscation";
 import min from "astro-min";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
@@ -30,7 +29,6 @@ export default defineConfig({
         expressiveCode(),
         icon(),
         partytown(),
-        mailObfuscation(),
         mdx(),
         min(),
         compressor(),

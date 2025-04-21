@@ -8,6 +8,7 @@ import Cat from "@/components/index/Cat.svelte";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.astro";
 import RandomAccent from "@/components/RandomAccent.svelte";
+import { DISCORD_ID, SIGNAL_URL, USERNAMES } from "@/consts";
 import Layout from "@/Layout.astro";
 import { fetchApi } from "@/utils";
 
@@ -38,8 +39,7 @@ const song = await fetchApi<Song>("song", Astro);
             generation of game server hosting. We're a small team with big
             amibitions - if you feel you've got something to bring to the table,
             or just want to find out more, we want to hear from you. No resumes
-            or CVs, just reach out to me on
-            <span data-obfuscation="0">newt@playamethyst.com</span>
+            or CVs, just <a href="#contact">reach out</a>.
         </p>
 
         <p>
@@ -77,12 +77,17 @@ const song = await fetchApi<Song>("song", Astro);
         </p>
         <ul class="*:mb-1">
             <li>
-                <Icon name="lucide:mail" />
-                <span data-obfuscation="0">hi@newty.dev</span>
+                <Icon name="ic:baseline-discord" class="hover:text-mauve" />
+                <a
+                    href={`https://discord.com/users/${DISCORD_ID}`}
+                    class="text-text"
+                >
+                    {USERNAMES.DISCORD}
+                </a>
             </li>
             <li>
-                <Icon name="ic:baseline-discord" />
-                <span data-obfuscation="0">isitreallyalive</span>
+                <Icon name="simple-icons:signal" class="hover:text-blue" />
+                <a href={SIGNAL_URL} class="text-text">{USERNAMES.SIGNAL}</a>
             </li>
         </ul>
     </div>
