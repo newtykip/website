@@ -10,6 +10,6 @@ const posts = await getPosts();
 ---
 
 <Layout>
-    <Heading class="my-2 !text-3xl" anchor={false}>Blog</Heading>
+    <Heading class="my-2 !text-3xl" slug={false}>Blog</Heading>
     <PostCollection {posts} />
 </Layout>

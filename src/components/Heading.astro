@@ -1,36 +1,36 @@
 ---
 import * as cheerio from "cheerio";
+import GithubSlugger from "github-slugger";
 
 import Underline from "@/components/Underline.astro";
 
 interface Props {
-    anchor?: boolean | string;
     class?: string;
     level?: number;
+    slug?: boolean | GithubSlugger | string;
 }
 
-const { anchor = true, class: clazz = "", level = 1 } = Astro.props;
+const {
+    class: clazz = "",
+    level = 1,
+    slug = new GithubSlugger(),
+} = Astro.props;
 
-const content = cheerio
-    .load((await Astro.slots.render("default")) || "")
-    .text();
-const anchorTag =
-    typeof anchor === "string"
-        ? anchor
-        : anchor
-          ? content
-                .toLowerCase()
-                .replaceAll(/[^a-z0-9- ]/g, "")
-                .replaceAll(" ", "-")
+const content = cheerio.load(await Astro.slots.render("default")).text();
+const parsedSlug =
+    typeof slug === "string"
+        ? slug
+        : slug instanceof GithubSlugger
+          ? slug.slug(content)
           : null;
 
 let classes = ["font-semibold", `h${level}`, ...clazz.split(" ")];
 ---
 
-<div id={anchorTag} class:list={classes}>
+<div id={parsedSlug} class:list={classes}>
     {
-        anchorTag ? (
-            <a href={`#${anchorTag}`} class="group relative">
+        slug ? (
+            <a href={`#${parsedSlug}`} class="group relative">
                 <span class="text-lavender select-none">
                     {"#".repeat(level)}
                 </span>

@@ -25,9 +25,9 @@ export default defineConfig({
             imports: ["@/components/Heading.astro"],
         }),
         expressiveCode(),
-        mdx(),
         icon(),
         mailObfuscation(),
+        mdx(),
     ],
 
     markdown: {

@@ -1,4 +1,4 @@
-import type { RehypePlugin } from "@astrojs/markdown-remark";
+import GithubSlugger from "github-slugger";
 import type { Element, Root } from "hast";
 import { visit } from "unist-util-visit";
 
@@ -16,8 +16,10 @@ function extractText(element: Element): string {
     return text;
 }
 
-export default function rehypeHeadings(): RehypePlugin {
+export default function rehypeHeadings() {
     return (tree: Root) => {
+        const slugger = new GithubSlugger();
+
         visit(tree, "element", (node) => {
             const match = /^h([1-6])$/.exec(node.tagName);
             if (match) {
@@ -32,9 +34,9 @@ export default function rehypeHeadings(): RehypePlugin {
                 ];
                 node.properties = {
                     level,
+                    slug: slugger.slug(content),
                     ...node.properties,
                 };
-                console.log(node);
             }
         });
     };

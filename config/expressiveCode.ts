@@ -11,19 +11,19 @@ export default () =>
             bundledLangs: ["ts", "rust"],
             transformers: [transformerColorizedBrackets()],
         },
+        styleOverrides: {
+            codeBackground: "var(--mantle)",
+            codeFontFamily: "var(--font-mono)",
+            frames: {
+                tooltipSuccessBackground: "var(--green)",
+                tooltipSuccessForeground: "#000000",
+            },
+            uiFontFamily: "var(--font-sans)",
+        },
         themes: [
             "catppuccin-latte",
             "catppuccin-frappe",
             "catppuccin-macchiato",
             "catppuccin-mocha",
         ],
-        styleOverrides: {
-            codeBackground: "var(--mantle)",
-            codeFontFamily: "var(--font-mono)",
-            uiFontFamily: "var(--font-sans)",
-            frames: {
-                tooltipSuccessBackground: "var(--green)",
-                tooltipSuccessForeground: "#000000",
-            },
-        },
     });
