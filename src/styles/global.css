@@ -31,7 +31,8 @@ a {
     @apply font-semibold text-4xl;
 }
 
-ul.list-disc {
+ul.list-disc,
+ol.list-decimal {
     li {
         @apply ml-4 *:mb-2;
     }

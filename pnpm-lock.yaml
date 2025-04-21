@@ -140,6 +140,9 @@ importers:
       sharp:
         specifier: ^0.34.1
         version: 0.34.1
+      spdx-license-list:
+        specifier: ^6.10.0
+        version: 6.10.0
       svelte:
         specifier: ^5.28.1
         version: 5.28.1
@@ -4128,6 +4131,10 @@ packages:
 
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+
+  spdx-license-list@6.10.0:
+    resolution: {integrity: sha512-wF3RhDFoqdu14d1Prv6c8aNU0FSRuSFJpNjWeygIZcNZEwPxp7I5/Hwo8j6lSkBKWAIkSQrKefrC5N0lvOP0Gw==}
+    engines: {node: '>=8'}
 
   statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
@@ -9546,6 +9553,8 @@ snapshots:
   source-map@0.7.4: {}
 
   space-separated-tokens@2.0.2: {}
+
+  spdx-license-list@6.10.0: {}
 
   statuses@2.0.1: {}
 

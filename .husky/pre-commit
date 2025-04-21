@@ -1,3 +1,4 @@
 pnpm lint --fix --quiet
 pnpm format --log-level silent
+pnpm ack
 git add .

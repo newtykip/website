@@ -1,0 +1,172 @@
+---
+import { decode } from "@msgpack/msgpack";
+import fs from "fs/promises";
+import licenses from "spdx-license-list";
+
+import Heading from "@/components/Heading.astro";
+import Layout from "@/Layout.astro";
+import { LinkType, type Package } from "@/scripts/ack/types";
+
+export const prerender = true;
+
+interface Entity {
+    name: string;
+    url: string;
+}
+
+interface Font extends Entity {
+    author: Entity;
+    license?: Entity;
+}
+
+interface Icon extends Entity {
+    license: Entity;
+}
+
+function resolveLink(pkg: Package): string {
+    if (pkg.link) {
+        const { content } = pkg.link;
+        switch (pkg.link.type) {
+            case LinkType.GITHUB:
+                return `https://github.com/${content}`;
+            case LinkType.OTHER:
+                return content;
+        }
+    }
+    return `https://npm.im/${pkg.name}`;
+}
+
+const packages = (
+    (await fs.readFile("ack.cache").then(decode)) as Package[]
+).sort((a, b) => a.name.localeCompare(b.name));
+const fonts: Font[] = [
+    {
+        author: {
+            name: "Rodrigo Fuenzalida",
+            url: "https://www.behance.net/erreefe",
+        },
+        name: "Outfit",
+        url: "https://fonts.google.com/specimen/Outfit",
+    },
+    {
+        author: {
+            name: "Philipp Nurullin",
+            url: "https://de.linkedin.com/in/nurullin-philipp-12584322b",
+        },
+        name: "JetBrains Mono",
+        url: "https://www.jetbrains.com/lp/mono/",
+    },
+    {
+        author: {
+            name: "Andrew Tyler",
+            url: "https://andrewtyler.gumroad.com/",
+        },
+        license: {
+            name: "Andrew Tyler Web Font EULA",
+            url: "https://docs.google.com/document/d/e/2PACX-1vTw12GLAP2uPQROo0nSWfNyH9n3_0zHykfCJINlwr553jN4JgfDlRyeZvnVi-7CNUvEaavXqZS2bbpj/pub",
+        },
+        name: "Minecraftia",
+        url: "https://andrewtyler.gumroad.com/l/minecraftia",
+    },
+].sort((a, b) => a.name.localeCompare(b.name));
+
+const icons: Icon[] = [
+    {
+        license: {
+            name: "ISC License",
+            url: "https://lucide.dev/license",
+        },
+        name: "Lucide",
+        url: "https://lucide.dev/",
+    },
+    {
+        license: {
+            name: "Pictogrammers Free License",
+            url: "https://github.com/Templarian/MaterialDesign/blob/master/LICENSE",
+        },
+        name: "Material Design Icons",
+        url: "https://pictogrammers.com/library/mdi/",
+    },
+    {
+        license: {
+            name: "Creative Commons Zero v1.0 Universal License",
+            url: "https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md",
+        },
+        name: "Simple Icons",
+        url: "https://simpleicons.org/",
+    },
+].sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<Layout class="*:flex *:flex-col gap-8 *:gap-2">
+    <div class="!gap-0 text-subtext0 text-sm">
+        <h1 class="title">ACK</h1>
+        <p>acknowledgements</p>
+    </div>
+    <div>
+        <Heading slug={false}>Table of Contents</Heading>
+        <ol class="list-decimal">
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#fonts">Fonts</a></li>
+            <li><a href="#icons">Icons</a></li>
+        </ol>
+    </div>
+
+    <div>
+        <Heading>Packages</Heading>
+        <ul class="list-disc">
+            {
+                packages.map((pkg) => {
+                    const { license } = pkg;
+                    const spdx = licenses?.[license];
+                    return (
+                        <li>
+                            <a href={resolveLink(pkg)}>{pkg.name}</a>,
+                            {spdx ? (
+                                <>
+                                    licensed under the{" "}
+                                    <a href={spdx.url}>{spdx.name}</a>
+                                </>
+                            ) : null}
+                        </li>
+                    );
+                })
+            }
+        </ul>
+    </div>
+    <div>
+        <Heading>Fonts</Heading>
+        <ul class="list-disc">
+            {
+                fonts.map(
+                    ({ author, license = licenses["OFL-1.1"], ...font }) => (
+                        <li>
+                            <a href={font.url}>{font.name}</a> by{" "}
+                            <a href={author.url}>{author.name}</a>, licensed
+                            under the the{" "}
+                            <a href={license.url}>{license.name}</a>
+                        </li>
+                    ),
+                )
+            }
+        </ul>
+    </div>
+    <div>
+        <Heading>Icons</Heading>
+        <p>
+            These icon sets are used in tandem with
+            <span class="font-semibold">@iconify/svelte</span> and
+            <span class="font-semibold">astro-icon</span> to provide iconography.
+        </p>
+        <ul class="list-disc">
+            {
+                icons.map(({ license, ...icon }) => (
+                    <li>
+                        <a href={icon.url}>{icon.name}</a>, licensed under the{" "}
+                        <a href={license.url}>{license.name}</a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</Layout>
