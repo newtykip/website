@@ -15,14 +15,19 @@ interface Props {
     class?: string;
     imageMeta?: sharp.Metadata;
     post?: CollectionEntry<"blog">;
+    title?: string;
 }
 
-const { imageMeta, post } = Astro.props;
+const { imageMeta, post, title } = Astro.props;
 
 const clazz = Astro.props.class?.split(" ") ?? [];
 
 // SEO
-const title = post ? removeMarkdown(post.data.title) : Astro.site!.host;
+const resolvedTitle = post
+    ? removeMarkdown(post.data.title)
+    : title
+      ? title
+      : Astro.site?.host;
 const description = post ? removeMarkdown(post.data.description!) : DESCRIPTION;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const image = `${Astro.site}blog/${post?.id || "introduction"}.webp`;
@@ -30,7 +35,7 @@ const image = `${Astro.site}blog/${post?.id || "introduction"}.webp`;
 const openGraph: AstroSEO["openGraph"] = {
     basic: {
         image,
-        title,
+        title: resolvedTitle,
         type: post ? "article" : "website",
     },
     image: {
@@ -52,7 +57,7 @@ const twitter: AstroSEO["twitter"] = {
     image,
     imageAlt: post?.data.heroAlt,
     site: `@${USERNAMES.TWITTER}`,
-    title,
+    title: resolvedTitle,
 };
 if (post) {
     openGraph.article = {
@@ -88,10 +93,16 @@ if (post) {
             ) : null
         }
 
-        <SEO {title} {description} {openGraph} {twitter} charset="utf-8" />
+        <SEO
+            title={resolvedTitle}
+            {description}
+            {openGraph}
+            {twitter}
+            charset="utf-8"
+        />
 
         <title>
-            {title}
+            {resolvedTitle}
         </title>
     </head>
     <body class="flex flex-col bg-base min-h-screen text-text">

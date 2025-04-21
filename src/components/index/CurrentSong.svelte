@@ -1,6 +1,6 @@
 <script lang="ts">
+    import type { Song } from "@/api/song";
     import { INTERVAL } from "@/consts";
-    import type { Song } from "@/pages/api/song";
     import { fetchApi } from "@/utils";
 
     interface Props {

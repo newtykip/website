@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import sharp from "sharp";
+import sharpIco from "sharp-ico";
 
 const UUID = "7e3661236beb48ecb6e147dbd319f41d";
 const BASE = {
@@ -42,6 +43,8 @@ const head = await downloadImage(
 );
 head.resize(32, 32);
 await saveImage(head, "src/images/head.png");
+head.resize(16, 16);
+sharpIco.sharpsToIco([head], "public/favicon.ico");
 
 // skin
 const skin = await downloadImage(`${BASE.CRAFATAR}/skins/${UUID}`);

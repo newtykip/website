@@ -1,6 +1,7 @@
 ---
 import "@/styles/index.css";
 
+import type { Song } from "@/api/song";
 import Accent from "@/components/Accent.svelte";
 import Heading from "@/components/Heading.astro";
 import Icon from "@/components/Icon.astro";
@@ -9,7 +10,6 @@ import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.astro";
 import { DISCORD_ID, HOMESERVER, SIGNAL_URL, USERNAMES } from "@/consts";
 import Layout from "@/Layout.astro";
-import type { Song } from "@/pages/api/song";
 import { fetchApi } from "@/utils";
 
 const song = await fetchApi<Song>("song", Astro);

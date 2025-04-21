@@ -1,4 +1,4 @@
-import type { Donation } from "@/pages/api/donation";
+import type { Donation } from "@/api/donation";
 
 /**
  * Site description
