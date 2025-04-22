@@ -3,20 +3,17 @@ import "@/styles/index.css";
 
 import { Image } from "astro:assets";
 
-import type { Song } from "@/api/song";
 import Accent from "@/components/Accent.svelte";
 import Heading from "@/components/Heading.astro";
 import Icon from "@/components/Icon.astro";
 import Cat from "@/components/index/Cat.svelte";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
-import Donation from "@/components/index/Donation.astro";
+import Donation from "@/components/index/Donation.svelte";
 import { DISCORD_ID, HOMESERVER, SIGNAL_URL, USERNAMES } from "@/consts";
 import head from "@/content/images/head.png";
 import Layout from "@/Layout.astro";
-import { fetchApi } from "@/utils";
 
-export const prerender = false;
-const song = await fetchApi<Song>("song", Astro);
+export const prerender = true;
 ---
 
 <Layout class="*:flex *:flex-col gap-4 *:gap-2">
@@ -75,9 +72,9 @@ const song = await fetchApi<Song>("song", Astro);
                             id="songImg"
                             height={24}
                             width={24}
-                            loading="eager"
+                            loading="lazy"
                         />
-                        <CurrentSong {song} client:load />
+                        <CurrentSong client:load />
                     </span>
                 </li>
                 <li>
@@ -85,7 +82,18 @@ const song = await fetchApi<Song>("song", Astro);
                         name="simple-icons:kofi"
                         class="hidden md:block flex-none text-2xl"
                     />
-                    <Donation />
+                    <span class="stat">
+                        <Image
+                            src={head}
+                            alt="newt's Minecraft head"
+                            class="animate-spin"
+                            id="donationImg"
+                            height={24}
+                            width={24}
+                            loading="lazy"
+                        />
+                        <Donation client:load />
+                    </span>
                 </li>
             </ul>
         </p>
@@ -119,11 +127,24 @@ const song = await fetchApi<Song>("song", Astro);
 </Layout>
 
 <script>
+    import { updateSong } from "@/components/index/CurrentSong.svelte";
+    import { updateDonation } from "@/components/index/Donation.svelte";
+    import donation from "@/stores/donation";
     import song from "@/stores/song";
 
-    const image = document.querySelector<HTMLImageElement>("#songImg")!;
+    updateSong();
+    updateDonation();
+
+    const songImg = document.querySelector<HTMLImageElement>("#songImg")!;
     song.subscribe((song) => {
-        image.src = song!.image;
-        image.alt = song!.albumName || song!.name || "";
+        songImg.src = song!.image;
+        songImg.alt = song!.albumName || song!.name || "";
+    });
+
+    const donationImg =
+        document.querySelector<HTMLImageElement>("#donationImg")!;
+    donation.subscribe((donation) => {
+        donationImg.src = donation!.avatar || "";
+        donationImg.alt = donation!.name || "";
     });
 </script>

@@ -11,6 +11,8 @@ import sharp from "sharp";
 import { formatDate } from "@/utils";
 import { getPosts } from "@/utils/server";
 
+export const prerender = true;
+
 function getIconHtml(set: IconifyJSON, icon: string) {
     const data = getIconData(set, icon)!;
     const render = iconToSVG(data, {});

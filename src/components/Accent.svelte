@@ -29,9 +29,8 @@
     let accent: AccentName | "text" = $state("text");
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <span
-    role="button"
-    tabindex={-1}
     onmouseenter={() =>
         (accent = accents[Math.floor(Math.random() * accents.length)])}
     onmouseleave={() => (accent = "text")}

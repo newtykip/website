@@ -3,8 +3,6 @@ import type { APIContext } from "astro";
 
 import { UMAMI } from "@/consts";
 
-export const prerender = false;
-
 const umami = getClient({
     apiEndpoint: `${UMAMI.URL}/api`,
     secret: import.meta.env.UMAMI_SECRET,

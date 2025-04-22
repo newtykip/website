@@ -8,6 +8,7 @@ export async function fetchApi<T>(
     endpoint: string,
     Astro?: AstroGlobal,
 ): Promise<T> {
+    console.log(Astro);
     return (await fetch(`${Astro ? Astro.url.origin : ""}/api/${endpoint}`)
         .then((res) => res.arrayBuffer())
         .then(decode)) as T;

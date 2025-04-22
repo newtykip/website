@@ -7,6 +7,8 @@ import { LinkType, type Package } from "@/build/scripts/ack/types";
 import Heading from "@/components/Heading.astro";
 import Layout from "@/Layout.astro";
 
+export const prerender = true;
+
 interface Entity {
     name: string;
     url: string;

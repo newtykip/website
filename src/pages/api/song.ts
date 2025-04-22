@@ -4,8 +4,6 @@ import type { APIContext } from "astro";
 
 import { USERNAMES } from "@/consts";
 
-export const prerender = false;
-
 const { LASTFM_SECRET, SPOTIFY_ID, SPOTIFY_SECRET } = import.meta.env;
 const spotifyClient = new SpotifyAPI({
     clientCredentials: {
@@ -30,11 +28,10 @@ export async function GET(_: APIContext) {
         .then((res) => res.json())
         .then((res) => res?.["recenttracks"]["track"][0])
         .then((track): Song => {
-            const images = track?.image;
             return {
                 albumName: track?.album["#text"],
                 artist: track?.artist["#text"],
-                image: images?.[images.length - 1]["#text"],
+                image: track?.image[0]["#text"],
                 name: track?.name,
                 url: track?.url,
             };

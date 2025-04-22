@@ -4,6 +4,8 @@ import Layout from "@/Layout.astro";
 import { getPosts } from "@/utils/server";
 
 const posts = await getPosts();
+
+export const prerender = true;
 ---
 
 <Layout>

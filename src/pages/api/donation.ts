@@ -1,10 +1,9 @@
+import { encode } from "@msgpack/msgpack";
 import type { APIContext } from "astro";
 import * as cheerio from "cheerio";
 import getSymbolFromCurrency from "currency-symbol-map";
 
 import redis from "@/redis";
-
-export const prerender = false;
 
 export interface Donation {
     amount: string;
@@ -12,6 +11,16 @@ export interface Donation {
     currency: string;
     id: string;
     name: string;
+}
+
+export async function GET(_: APIContext) {
+    const donation = (await redis.get("donation")) as Donation;
+    return new Response(encode(donation), {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        status: 200,
+    });
 }
 
 export async function POST({ request }: APIContext) {

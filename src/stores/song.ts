@@ -1,5 +1,4 @@
-import { atom } from "nanostores";
+import type { Song } from "@/pages/api/song";
+import { persistentMsgpack } from "@/utils/client";
 
-import type { Song } from "@/api/song";
-
-export default atom<Song | undefined>();
+export default persistentMsgpack<Song | undefined>("song", undefined);

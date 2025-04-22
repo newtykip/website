@@ -20,6 +20,7 @@
 <button
     class="*:font-bold *:text-xl text-center *:whitespace-pre hover:cursor-pointer select-none"
     onclick={() => enabled.update((value) => !value)}
+    aria-label="Toggle cat"
 >
     <div>&nbsp;/\_/\</div>
     <div>

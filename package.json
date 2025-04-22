@@ -94,6 +94,7 @@
         "prettier": "^3.5.3",
         "prettier-plugin-astro": "^0.14.1",
         "prettier-plugin-svelte": "^3.3.3",
+        "rollup-plugin-visualizer": "^5.14.0",
         "sass-embedded": "^1.86.3",
         "sharp-ico": "^0.1.5",
         "tsx": "^4.19.3",

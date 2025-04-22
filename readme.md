@@ -8,3 +8,4 @@ My personal website, built with Astro.
 - populate site with blog posts
 - add maintainers to /ack
 - translate to Swedish
+- check contrast across themes

@@ -11,6 +11,7 @@ import autoImport from "astro-auto-import";
 import icon from "astro-icon";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import { visualizer } from "rollup-plugin-visualizer";
 
 import expressiveCode from "./src/build/config/expressiveCode";
 import rehypeHeadings from "./src/build/plugins/rehypeHeadings";
@@ -41,7 +42,7 @@ export default defineConfig({
         rehypePlugins: [rehypeKatex, rehypeHeadings],
         remarkPlugins: [remarkMath, remarkReadingTime],
     },
-    output: "static",
+    output: "server",
 
     site: "https://newty.dev",
 
@@ -49,7 +50,14 @@ export default defineConfig({
         css: {
             transformer: "lightningcss",
         },
-        plugins: [tailwindcss(), threeMinifier()],
+        plugins: [
+            tailwindcss(),
+            threeMinifier(),
+            visualizer({
+                emitFile: true,
+                filename: "stats.html",
+            }),
+        ],
         server: {
             allowedHosts: [".ngrok-free.app"],
         },

@@ -26,6 +26,7 @@
     <button
         onclick={() => (open = !open)}
         class="absolute inset-0 mt-0.5 cursor-pointer"
+        aria-label="Theme picker"
     >
         <Accent>
             <Icon icon="lucide:palette" class="text-xl" />

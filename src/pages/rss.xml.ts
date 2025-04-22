@@ -5,6 +5,8 @@ import removeMarkdown from "remove-markdown";
 import { DESCRIPTION } from "@/consts";
 import { getPosts } from "@/utils/server";
 
+export const prerender = true;
+
 export async function GET(context: APIContext) {
     const posts = await getPosts();
 
