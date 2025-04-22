@@ -42,7 +42,7 @@
     const width = (height / 832) * 512;
     const isNewt = uuid === UUID;
     const render = isNewt
-        ? "/mc/render.png"
+        ? "/mc/render.webp"
         : `${BASE.VISAGE}/frontfull/${height}/${uuid}.webp?no=ears`;
 
     // svelte-ignore non_reactive_update
@@ -64,7 +64,7 @@
                     canvas,
                     cape: hasCape
                         ? isNewt
-                            ? "/mc/cape.png"
+                            ? "/mc/cape.webp"
                             : capeUrl
                         : undefined,
                     height,
@@ -73,7 +73,7 @@
                     }),
                     renderPaused: true,
                     skin: isNewt
-                        ? "/mc/skin.png"
+                        ? "/mc/skin.webp"
                         : `${BASE.CRAFATAR}/skins/${uuid}`,
                     width,
                     zoom: 0.75,

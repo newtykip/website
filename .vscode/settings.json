@@ -2,7 +2,7 @@
     "files.exclude": {
         ".astro": true,
         ".vercel": true,
-        // "dist": true,
+        "dist": true,
         "node_modules": true,
         ".husky": true
     },

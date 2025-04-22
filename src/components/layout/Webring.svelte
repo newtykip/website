@@ -17,7 +17,7 @@
     <a href="https://ctp-webr.ing" target="_blank">
         <Accent class="flex items-center gap-2">
             <img
-                src="/catppuccin.png"
+                src="/catppuccin.webp"
                 alt="Catppuccin logo"
                 class="mt-0.5 w-6 h-6"
                 loading="lazy"

@@ -20,7 +20,7 @@ async function getBuffer(url: string): Promise<ArrayBuffer> {
  */
 async function downloadImage(url: string): Promise<sharp.Sharp> {
     const buffer = await getBuffer(url);
-    return sharp(buffer);
+    return sharp(buffer).toFormat("webp");
 }
 
 /**
@@ -37,23 +37,23 @@ const head = await downloadImage(
     `${BASE.CRAFATAR}/avatars/${UUID}?overlay&size=256`,
 );
 head.resize(48, 48);
-await saveImage(head, "content/images/head.png");
+await saveImage(head, "content/images/head.webp");
 head.resize(32, 32);
 sharpIco.sharpsToIco([head], "public/favicon.ico");
 
 // skin
 const skin = await downloadImage(`${BASE.VISAGE}/processedskin/${UUID}`);
-await saveImage(skin, "public/mc/skin.png");
+await saveImage(skin, "public/mc/skin.webp");
 
 // skin render
 const skinRender = await downloadImage(
-    `${BASE.VISAGE}/frontfull/832/${UUID}.webp?no=ears`,
+    `${BASE.VISAGE}/frontfull/832/${UUID}.png?no=ears`,
 );
-await saveImage(skinRender, "public/mc/render.webp ");
+await saveImage(skinRender, "public/mc/render.webp");
 
 // cape
 const capeUrl = await fetch(`${BASE.CAPES}/load/${UUID}/optifine`)
     .then((res) => res.json())
     .then((data) => data.imageUrl as string);
 const cape = await downloadImage(capeUrl);
-await saveImage(cape, "public/mc/cape.png");
+await saveImage(cape, "public/mc/cape.webp");
