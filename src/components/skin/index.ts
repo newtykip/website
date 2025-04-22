@@ -1,3 +1,5 @@
+export { CAPE_SOURCES, type CapeSource, PLAYERS } from "@/build/consts";
+
 /**
  * Skin controls for the skin viewer
  */

@@ -6,23 +6,19 @@
         WalkingAnimation,
     } from "skinview3d";
 
-    import { Controls, isControlEnabled } from "@/components/skin";
-    import { BASE, UUID } from "@/consts/scripts";
+    import {
+        type CapeSource,
+        Controls,
+        isControlEnabled,
+    } from "@/components/skin";
     import { isWebGL } from "@/utils/client";
 
-    type CapeSource =
-        | "minecraft"
-        | "optifine"
-        | "minecraftcapes"
-        | "labymod"
-        | "5zig"
-        | "tlauncher";
     export interface Props
         extends Omit<
             Partial<SkinViewerOptions>,
             "enableControls" | "cape" | "renderPaused"
         > {
-        cape?: false | CapeSource;
+        cape?: CapeSource;
         controls?: Controls;
         height: number;
         username?: string;
@@ -31,7 +27,7 @@
     }
 
     const {
-        cape: hasCape = "optifine",
+        cape,
         controls,
         height,
         username,
@@ -40,41 +36,24 @@
         ...options
     }: Props = $props();
     const width = (height / 832) * 512;
-    const isNewt = uuid === UUID;
-    const render = isNewt
-        ? "/mc/render.webp"
-        : `${BASE.VISAGE}/frontfull/${height}/${uuid}.webp?no=ears`;
 
     // svelte-ignore non_reactive_update
     let canvas: HTMLCanvasElement;
     const webgl = isWebGL();
     let loading = $state(webgl);
-
     if (webgl) {
         $effect(() => {
             (async () => {
-                const capeUrl = hasCape
-                    ? await fetch(`${BASE.CAPES}/load/${uuid}/${hasCape}`)
-                          .then((res) => res.json())
-                          .then((data) => data.imageUrl as string)
-                    : undefined;
-
                 const viewer = new SkinViewer({
                     animation: walking ? new WalkingAnimation() : undefined,
                     canvas,
-                    cape: hasCape
-                        ? isNewt
-                            ? "/mc/cape.webp"
-                            : capeUrl
-                        : undefined,
+                    cape: cape ? `/mc/cape/${uuid}.webp` : undefined,
                     height,
                     nameTag: new NameTagObject(username, {
                         font: "24px Minecraft",
                     }),
                     renderPaused: true,
-                    skin: isNewt
-                        ? "/mc/skin.webp"
-                        : `${BASE.CRAFATAR}/skins/${uuid}`,
+                    skin: `/mc/skin/${uuid}.webp`,
                     width,
                     zoom: 0.75,
                     ...options,
@@ -113,7 +92,13 @@
 
 {#if !webgl || loading}
     <figure class="flex flex-col items-center text-center">
-        <img src={render} alt={username} {height} {width} class="block" />
+        <img
+            src={`/mc/render/${uuid}.webp`}
+            alt={username}
+            {height}
+            {width}
+            class="block"
+        />
         <figcaption class="mt-4 text-subtext0 text-sm">
             {#if !webgl}
                 If you enable WebGL this render will become interactive!

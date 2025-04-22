@@ -6,14 +6,13 @@
     "packageManager": "pnpm@10.8.1",
     "scripts": {
         "dev": "astro dev",
-        "build": "pnpm assets && astro build",
+        "build": "astro build",
         "preview": "PREVIEW=1 astro build && PREVIEW=1 astro preview",
         "astro": "astro",
         "lint": "eslint src/**/*.{astro,ts,svelte,d.ts} *.{mjs,ts}",
         "format": "prettier src/**/*.{astro,ts,svelte,css,d.ts} *.{mjs,ts,config.ts} --write",
         "prepare": "husky",
-        "assets": "tsx src/build/scripts/assets.ts",
-        "ack": "tsx src/build/scripts/ack/index.ts"
+        "ack": "tsx src/build/ack/index.ts"
     },
     "dependencies": {
         "@astrojs/mdx": "^4.2.4",

@@ -14,12 +14,18 @@ import remarkMath from "remark-math";
 import { visualizer } from "rollup-plugin-visualizer";
 
 import expressiveCode from "./src/build/config/expressiveCode";
+import { PLAYERS } from "./src/build/consts";
 import rehypeHeadings from "./src/build/plugins/rehypeHeadings";
 import remarkReadingTime from "./src/build/plugins/remarkReadingTime";
+import { downloadAssets } from "./src/build/utils";
 
 const previewBuild = process.env.PREVIEW !== undefined;
 
 // https://astro.build/config
+for (const player of Object.keys(PLAYERS)) {
+    await downloadAssets(player as keyof typeof PLAYERS);
+}
+
 export default defineConfig({
     adapter: previewBuild ? node({ mode: "standalone" }) : vercel(),
     image: {

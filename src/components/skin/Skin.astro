@@ -1,19 +1,19 @@
 ---
 import "@south-paw/typeface-minecraft";
 
+import { PLAYERS } from "@/components/skin";
 import SkinRenderer, {
-    type Props,
+    type Props as RendererProps,
 } from "@/components/skin/SkinRenderer.svelte";
-import { UUID } from "@/consts";
 
 export { Controls } from "@/components/skin";
 
-const { uuid = UUID, ...props } = Astro.props as Omit<
-    Omit<Props, "uuid">,
-    "username"
-> & {
-    uuid?: string;
-};
+interface Props extends Omit<RendererProps, "username" | "uuid"> {
+    player?: keyof typeof PLAYERS;
+}
+
+const { player = "newt", ...props } = Astro.props;
+const { cape, uuid } = PLAYERS[player];
 
 const username = await fetch(
     `https://api.minecraftservices.com/minecraft/profile/lookup/${uuid}`,
@@ -22,4 +22,4 @@ const username = await fetch(
     .then((data) => data.name as string);
 ---
 
-<SkinRenderer client:only="svelte" {username} {uuid} {...props} />
+<SkinRenderer client:only="svelte" {username} {uuid} {cape} {...props} />
