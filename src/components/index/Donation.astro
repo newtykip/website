@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 import type { Donation } from "@/api/donation";
 import { DUMMY_DONATION } from "@/consts";
 import redis from "@/redis";
@@ -15,7 +17,17 @@ const { amount, avatar, currency, id, name } = donation!;
 ---
 
 <span class="stat">
-    <img src={avatar} alt={name} />
+    {
+        avatar ? (
+            <Image
+                src={avatar}
+                alt={name}
+                height={24}
+                width={24}
+                loading="eager"
+            />
+        ) : null
+    }
     <a
         href={`https://ko-fi.com/home/coffeeshop?txid=${id}`}
         class="text-text hover:!text-peach"

@@ -31,7 +31,7 @@ let classes = ["font-semibold", `h${level}`, ...clazz.split(" ")];
     {
         slug ? (
             <a href={`#${parsedSlug}`} class="group relative !text-text">
-                <span class="text-lavender select-none">
+                <span class="text-lavender whitespace-nowrap select-none">
                     {"#".repeat(level)}
                 </span>
                 <Underline>
@@ -40,7 +40,7 @@ let classes = ["font-semibold", `h${level}`, ...clazz.split(" ")];
             </a>
         ) : (
             <div class="group relative cursor-default">
-                <span class="text-lavender select-none">
+                <span class="text-lavender whitespace-nowrap select-none">
                     {"#".repeat(level)}
                 </span>
                 <Underline>

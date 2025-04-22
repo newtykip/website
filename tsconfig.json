@@ -7,9 +7,7 @@
         "paths": {
             "@/*": ["./src/*"],
             "@/api/*": ["./src/pages/api/*"],
-            "@/content/*": ["./content/*"],
-            "@/utils": ["./src/utils/index.ts"],
-            "@/consts": ["./src/consts/index.ts"]
+            "@/content/*": ["./content/*"]
         },
         "esModuleInterop": true
     }

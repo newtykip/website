@@ -10,6 +10,7 @@ interface Link {
     colour: AccentName;
     href: string;
     icon: string;
+    label: string;
 }
 
 const links: Link[] = [
@@ -17,16 +18,19 @@ const links: Link[] = [
         colour: "maroon",
         href: `https://git.redstone.observer/${USERNAMES.GITLAB}`,
         icon: "lucide:gitlab",
+        label: "GitLab",
     },
     {
         colour: "peach",
         href: `https://ko-fi.com/${USERNAMES.KOFI}`,
         icon: "simple-icons:kofi",
+        label: "Ko-fi",
     },
     {
         colour: "green",
         href: `https://modinth.com/user/${USERNAMES.MODRINTH}`,
         icon: "simple-icons:modrinth",
+        label: "Modrinth",
     },
 ];
 const colourTransition = ["transition-colors", "duration-200", "ease-in-out"];
@@ -36,7 +40,7 @@ const colourTransition = ["transition-colors", "duration-200", "ease-in-out"];
     <div class="flex flex-col items-center gap-6 mx-auto w-1/2">
         <div class="flex justify-around w-full">
             {
-                links.map(({ colour, href, icon: name }) => (
+                links.map(({ colour, href, icon: name, label }) => (
                     <a
                         {href}
                         target="_blank"
@@ -46,8 +50,9 @@ const colourTransition = ["transition-colors", "duration-200", "ease-in-out"];
                             `hover:!text-${colour}`,
                             ...colourTransition,
                         ]}
+                        aria-label={label}
                     >
-                        <Icon name={name} class="text-2xl" />
+                        <Icon {name} class="text-2xl" />
                     </a>
                 ))
             }

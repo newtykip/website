@@ -7,3 +7,4 @@ My personal website, built with Astro.
 - add build commit to footer
 - populate site with blog posts
 - add maintainers to /ack
+- translate to Swedish

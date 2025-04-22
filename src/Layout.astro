@@ -1,112 +1,20 @@
 ---
 import "@/styles/global.css";
 
-import type { CollectionEntry } from "astro:content";
-import { type Props as AstroSEO, SEO } from "astro-seo";
-import removeMarkdown from "remove-markdown";
-import type sharp from "sharp";
-
 import Footer from "@/components/layout/Footer.astro";
+import Head, { type Props as HeadProps } from "@/components/layout/Head.astro";
 import Navbar from "@/components/layout/Navbar.astro";
-import { DESCRIPTION, UMAMI, USERNAMES } from "@/consts";
-import { formatDate } from "@/utils";
 
-interface Props {
+interface Props extends HeadProps {
     class?: string;
-    imageMeta?: sharp.Metadata;
-    post?: CollectionEntry<"blog">;
-    title?: string;
 }
 
-const { imageMeta, post, title } = Astro.props;
-
-const clazz = Astro.props.class?.split(" ") ?? [];
-
-// SEO
-const resolvedTitle = post
-    ? removeMarkdown(post.data.title)
-    : title
-      ? title
-      : Astro.site!.host;
-const description = post ? removeMarkdown(post.data.description!) : DESCRIPTION;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const image = post
-    ? `${Astro.site}blog/${post?.id || "introduction"}.webp`
-    : `${Astro.site}hero/introduction.webp`;
-
-const openGraph: AstroSEO["openGraph"] = {
-    basic: {
-        image,
-        title: resolvedTitle,
-        type: post ? "article" : "website",
-    },
-    image: {
-        alt: post?.data.heroAlt,
-        height: imageMeta?.height,
-        type: imageMeta?.format,
-        width: imageMeta?.width,
-    },
-    optional: {
-        description,
-        locale: "en_GB",
-        siteName: Astro.site?.toString(),
-    },
-};
-const twitter: AstroSEO["twitter"] = {
-    card: "summary_large_image",
-    creator: `@${USERNAMES.TWITTER}`,
-    description,
-    image,
-    imageAlt: post?.data.heroAlt,
-    site: `@${USERNAMES.TWITTER}`,
-    title: resolvedTitle,
-};
-if (post) {
-    openGraph.article = {
-        authors: ["newt"],
-        publishedTime: formatDate(post.data.published!),
-        section: "Technology",
-        tags: post.data.tags,
-    };
-}
+const { class: clazz, ...headProps } = Astro.props;
+const classList = clazz?.split(" ") ?? [];
 ---
 
 <html lang="en" data-theme="catppuccin-latte">
-    <head>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="sitemap" href="/sitemap-index.xml" />
-        <link
-            rel="alternate"
-            type="application/rss+xml"
-            title={Astro.site?.toString()}
-            href={new URL("rss.xml", Astro.site)}
-        />
-        <meta name="generator" content={Astro.generator} />
-        <link rel="canonical" href={canonicalURL} />
-
-        {
-            import.meta.env.PROD ? (
-                <script
-                    type="text/partytown"
-                    src={`${UMAMI.URL}/script.js`}
-                    data-website-id={UMAMI.ID}
-                />
-            ) : null
-        }
-
-        <SEO
-            title={resolvedTitle}
-            {description}
-            {openGraph}
-            {twitter}
-            charset="utf-8"
-        />
-
-        <title>
-            {resolvedTitle}
-        </title>
-    </head>
+    <Head {...headProps} />
     <body class="flex flex-col bg-base min-h-screen text-text">
         <Navbar />
         <main
@@ -118,7 +26,7 @@ if (post) {
                 "mt-5",
                 "mb-8",
                 "w-3/5",
-                ...clazz,
+                ...classList,
             ]}
         >
             <slot />

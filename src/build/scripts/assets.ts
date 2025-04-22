@@ -36,8 +36,9 @@ async function saveImage(image: sharp.Sharp, path: string) {
 const head = await downloadImage(
     `${BASE.CRAFATAR}/avatars/${UUID}?overlay&size=256`,
 );
-head.resize(32, 32);
+head.resize(48, 48);
 await saveImage(head, "content/images/head.png");
+head.resize(32, 32);
 sharpIco.sharpsToIco([head], "public/favicon.ico");
 
 // skin

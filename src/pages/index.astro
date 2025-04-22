@@ -1,6 +1,8 @@
 ---
 import "@/styles/index.css";
 
+import { Image } from "astro:assets";
+
 import type { Song } from "@/api/song";
 import Accent from "@/components/Accent.svelte";
 import Heading from "@/components/Heading.astro";
@@ -9,9 +11,11 @@ import Cat from "@/components/index/Cat.svelte";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.astro";
 import { DISCORD_ID, HOMESERVER, SIGNAL_URL, USERNAMES } from "@/consts";
+import head from "@/content/images/head.png";
 import Layout from "@/Layout.astro";
 import { fetchApi } from "@/utils";
 
+export const prerender = false;
 const song = await fetchApi<Song>("song", Astro);
 ---
 
@@ -43,11 +47,11 @@ const song = await fetchApi<Song>("song", Astro);
         </p>
 
         <p>
-            I like to share my experiences and opinions on my blog. In the
-            future, I will share further details about
+            I like to share my experiences and opinions on my
+            <a href="/blog">blog</a>. In the future, I will share further
+            details about
             <span class="font-medium text-mauve">amethyst</span> and my experiences
-            running a business. You can check it out
-            <a href="/blog">here</a>.
+            running a business.
         </p>
 
         <p>
@@ -63,7 +67,18 @@ const song = await fetchApi<Song>("song", Astro);
                         name="mdi:spotify"
                         class="hidden md:block flex-none text-2xl"
                     />
-                    <CurrentSong {song} client:load />
+                    <span class="stat">
+                        <Image
+                            src={head}
+                            alt="newt's Minecraft head"
+                            class="animate-spin"
+                            id="songImg"
+                            height={24}
+                            width={24}
+                            loading="eager"
+                        />
+                        <CurrentSong {song} client:load />
+                    </span>
                 </li>
                 <li>
                     <Icon
@@ -74,30 +89,41 @@ const song = await fetchApi<Song>("song", Astro);
                 </li>
             </ul>
         </p>
-    </div>
-    <div>
-        <Heading slug="contact">Get in touch</Heading>
-        <p>
-            I will respond quickest on
-            <Icon
-                name="ic:baseline-discord"
-                class="inline-block hover:text-mauve"
-            />, but you can reach me through any of the following:
-        </p>
-        <ul class="mt-2 *:mb-1">
-            <li>
-                <Icon name="ic:baseline-discord" class="hover:text-mauve" />
-                <a
-                    href={`https://discord.com/users/${DISCORD_ID}`}
-                    class="text-text"
-                >
-                    {USERNAMES.DISCORD}
-                </a>
-            </li>
-            <li>
-                <Icon name="simple-icons:signal" class="hover:text-blue" />
-                <a href={SIGNAL_URL} class="text-text">{USERNAMES.SIGNAL}</a>
-            </li>
-        </ul>
+        <div>
+            <Heading slug="contact">Get in touch</Heading>
+            <p>
+                I will respond quickest on
+                <Icon
+                    name="ic:baseline-discord"
+                    class="inline-block hover:text-mauve"
+                />, but you can reach me through any of the following:
+            </p>
+            <ul class="mt-2 *:mb-1">
+                <li>
+                    <Icon name="ic:baseline-discord" class="hover:text-mauve" />
+                    <a
+                        href={`https://discord.com/users/${DISCORD_ID}`}
+                        class="text-text"
+                    >
+                        {USERNAMES.DISCORD}
+                    </a>
+                </li>
+                <li>
+                    <Icon name="simple-icons:signal" class="hover:text-blue" />
+                    <a href={SIGNAL_URL} class="text-text">{USERNAMES.SIGNAL}</a
+                    >
+                </li>
+            </ul>
+        </div>
     </div>
 </Layout>
+
+<script>
+    import song from "@/stores/song";
+
+    const image = document.querySelector<HTMLImageElement>("#songImg")!;
+    song.subscribe((song) => {
+        image.src = song!.image;
+        image.alt = song!.albumName || song!.name || "";
+    });
+</script>

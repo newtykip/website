@@ -3,8 +3,6 @@ import PostCollection from "@/components/blog/PostCollection.astro";
 import Layout from "@/Layout.astro";
 import { getPosts } from "@/utils/server";
 
-export const prerender = true;
-
 const posts = await getPosts();
 ---
 

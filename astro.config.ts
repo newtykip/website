@@ -1,6 +1,7 @@
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
@@ -20,6 +21,10 @@ const previewBuild = process.env.PREVIEW !== undefined;
 // https://astro.build/config
 export default defineConfig({
     adapter: previewBuild ? node({ mode: "standalone" }) : vercel(),
+    image: {
+        domains: ["storage.ko-fi.com"],
+    },
+
     integrations: [
         svelte(),
         autoImport({
@@ -29,14 +34,15 @@ export default defineConfig({
         icon(),
         partytown(),
         mdx(),
+        sitemap(),
     ],
 
     markdown: {
         rehypePlugins: [rehypeKatex, rehypeHeadings],
         remarkPlugins: [remarkMath, remarkReadingTime],
     },
+    output: "static",
 
-    output: "server",
     site: "https://newty.dev",
 
     vite: {

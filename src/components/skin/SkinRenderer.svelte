@@ -6,8 +6,7 @@
         WalkingAnimation,
     } from "skinview3d";
 
-    // @ts-expect-error can't import from .astro
-    import { Controls, isControlEnabled } from "@/components/skin/Skin.astro";
+    import { Controls, isControlEnabled } from "@/components/skin";
     import { BASE, UUID } from "@/consts/scripts";
     import { isWebGL } from "@/utils/client";
 

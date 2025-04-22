@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { type Props as AstroSEO, SEO } from "astro-seo";
+import removeMarkdown from "remove-markdown";
+import type sharp from "sharp";
+
+import { DESCRIPTION, UMAMI, USERNAMES } from "@/consts";
+import { formatDate } from "@/utils";
+
+export interface Props {
+    class?: string;
+    imageMeta?: sharp.Metadata;
+    post?: CollectionEntry<"blog">;
+    title?: string;
+}
+
+const { imageMeta, post } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const title = post
+    ? removeMarkdown(post.data.title)
+    : Astro.props.title
+      ? Astro.props.title
+      : Astro.site!.host;
+const description = post ? removeMarkdown(post.data.description!) : DESCRIPTION;
+const image = post
+    ? `${Astro.site}blog/${post?.id || "introduction"}.webp`
+    : `${Astro.site}hero/introduction.webp`;
+
+const openGraph: AstroSEO["openGraph"] = {
+    basic: {
+        image,
+        title: title,
+        type: post ? "article" : "website",
+    },
+    image: {
+        alt: post?.data.heroAlt,
+        height: imageMeta?.height,
+        type: imageMeta?.format,
+        width: imageMeta?.width,
+    },
+    optional: {
+        description,
+        locale: "en_GB",
+        siteName: Astro.site?.toString(),
+    },
+};
+const twitter: AstroSEO["twitter"] = {
+    card: "summary_large_image",
+    creator: `@${USERNAMES.TWITTER}`,
+    description,
+    image,
+    imageAlt: post?.data.heroAlt,
+    site: `@${USERNAMES.TWITTER}`,
+    title,
+};
+if (post) {
+    openGraph.article = {
+        authors: ["newt"],
+        publishedTime: formatDate(post.data.published!),
+        section: "Technology",
+        tags: post.data.tags,
+    };
+}
+---
+
+<!-- Full list of meta tags: https://gist.github.com/whitingx/3840905 -->
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={Astro.site?.toString()}
+        href={new URL("rss.xml", Astro.site)}
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta
+        name="keywords"
+        content={post ? post.data.tags.join(",") : "blog,personal,developer"}
+    />
+
+    <!-- umami -->
+    {
+        import.meta.env.PROD ? (
+            <script
+                type="text/partytown"
+                src={`${UMAMI.URL}/script.js`}
+                data-website-id={UMAMI.ID}
+            />
+        ) : null
+    }
+
+    <!-- OGP/Twitter -->
+    <SEO {title} {description} {openGraph} {twitter} charset="utf-8" />
+
+    <title>{title}</title>
+</head>

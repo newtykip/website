@@ -4,6 +4,8 @@ import getSymbolFromCurrency from "currency-symbol-map";
 
 import redis from "@/redis";
 
+export const prerender = false;
+
 export interface Donation {
     amount: string;
     avatar?: string;

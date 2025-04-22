@@ -4,6 +4,8 @@ import type { APIContext } from "astro";
 
 import { USERNAMES } from "@/consts";
 
+export const prerender = false;
+
 const { LASTFM_SECRET, SPOTIFY_ID, SPOTIFY_SECRET } = import.meta.env;
 const spotifyClient = new SpotifyAPI({
     clientCredentials: {
