@@ -3,8 +3,8 @@
         ".astro": true,
         ".vercel": true,
         "dist": true,
-        "node_modules": true,
-        ".husky": true
+        "node_modules": true
+        // ".husky": true
     },
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",

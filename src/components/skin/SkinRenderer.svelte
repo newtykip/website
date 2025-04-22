@@ -45,7 +45,6 @@
         $effect(() => {
             (async () => {
                 const viewer = new SkinViewer({
-                    animation: walking ? new WalkingAnimation() : undefined,
                     canvas,
                     cape: cape ? `/mc/cape/${uuid}.webp` : undefined,
                     height,
@@ -58,6 +57,10 @@
                     zoom: 0.75,
                     ...options,
                 });
+
+                if (walking) {
+                    viewer.animation = new WalkingAnimation();
+                }
 
                 // controls
                 if (!isControlEnabled(Controls.RotateVert, controls)) {
@@ -74,13 +77,22 @@
                     viewer.controls.enableZoom = false;
                 }
 
-                function render() {
+                let lastTimestamp = -1;
+                function render(timestamp: number) {
+                    // animate
+                    const deltaTime = (timestamp - lastTimestamp) / 1000;
+                    viewer.animation?.update(viewer.playerObject, deltaTime);
+                    lastTimestamp = timestamp;
+
+                    // render
                     viewer.render();
-                    if (loading) loading = false;
                     requestAnimationFrame(render);
+
+                    // mark as loaded
+                    if (loading) loading = false;
                 }
 
-                render();
+                requestAnimationFrame(render);
             })();
         });
     }
@@ -99,7 +111,7 @@
             {width}
             class="block"
         />
-        <figcaption class="mt-4 text-subtext0 text-sm">
+        <figcaption class="mt-4 w-56 text-subtext0 text-sm break-words">
             {#if !webgl}
                 If you enable WebGL this render will become interactive!
             {:else}

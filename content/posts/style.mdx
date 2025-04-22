@@ -1,10 +1,17 @@
 ---
 title: "`style` **te** *s* ***t***"
 tags: ["test"]
-hero: "/blog/introduction.webp"
+hero: "/hero/introduction.webp"
 ---
 
 ## hello
+
+import Skin, { Controls } from "@/components/skin/Skin.astro";
+
+<div class="flex gap-8">
+    <Skin height={250} controls={Controls.RotateHori} walking />
+    <Skin height={250} controls={Controls.Rotate} player={"MumboJumbo"} />
+</div>
 
 ```ts twoslash
 const readOnly: Readonly<number> = 3;

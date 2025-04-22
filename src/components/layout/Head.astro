@@ -57,7 +57,9 @@ const twitter: AstroSEO["twitter"] = {
 if (post) {
     openGraph.article = {
         authors: ["newt"],
-        publishedTime: formatDate(post.data.published!),
+        publishedTime: post.data.published
+            ? formatDate(post.data.published)
+            : undefined,
         section: "Technology",
         tags: post.data.tags,
     };
