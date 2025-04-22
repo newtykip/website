@@ -14,7 +14,7 @@
             <Icon icon="lucide:arrow-left" class="text-xl" />
         </Accent>
     </a>
-    <a href="https://ctp-webr.ing" target="_blank" rel="noopener">
+    <a href="https://ctp-webr.ing" target="_blank">
         <Accent class="flex items-center gap-2">
             <img
                 src="/catppuccin.png"

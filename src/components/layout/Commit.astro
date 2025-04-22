@@ -1,0 +1,26 @@
+---
+import { exec } from "child_process";
+import { promisify } from "util";
+
+import Icon from "@/components/Icon.astro";
+import { REPO_URL } from "@/consts";
+
+async function execAsync(command: string): Promise<string> {
+    const { stdout } = await promisify(exec)(command);
+    return stdout;
+}
+
+const { VERCEL_GIT_COMMIT_MESSAGE, VERCEL_GIT_COMMIT_SHA } = import.meta.env;
+const message =
+    VERCEL_GIT_COMMIT_MESSAGE ?? (await execAsync("git log -1 --pretty=%B"));
+const sha = VERCEL_GIT_COMMIT_SHA ?? (await execAsync("git rev-parse HEAD"));
+---
+
+<a
+    href={`${REPO_URL}/-/tree/${sha}`}
+    target="_blank"
+    class="flex items-center gap-1 !text-subtext0 hover:!text-red"
+>
+    <Icon name="mdi:git" />
+    {message}
+</a>

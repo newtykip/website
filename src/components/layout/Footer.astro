@@ -2,6 +2,7 @@
 import type { AccentName } from "@catppuccin/palette";
 
 import Icon from "@/components/Icon.astro";
+import Commit from "@/components/layout/Commit.astro";
 import Time from "@/components/layout/Time.svelte";
 import Webring from "@/components/layout/Webring.svelte";
 import { USERNAMES } from "@/consts";
@@ -44,7 +45,6 @@ const colourTransition = ["transition-colors", "duration-200", "ease-in-out"];
                     <a
                         {href}
                         target="_blank"
-                        rel="noopener"
                         class:list={[
                             "text-text",
                             `hover:!text-${colour}`,
@@ -59,14 +59,17 @@ const colourTransition = ["transition-colors", "duration-200", "ease-in-out"];
         </div>
 
         <ul class="flex flex-col items-center text-center list-none">
-            <li class="flex items-center gap-1">
+            <li>
                 made with <Icon
                     name="mdi:heart"
-                    class="hover:text-red cursor-pointer"
+                    class="inline-block hover:text-red cursor-pointer"
                 /> by newt
             </li>
             <li class="text-subtext0">
                 <Time client:only="svelte" />
+            </li>
+            <li class="text-subtext0">
+                <Commit />
             </li>
             <li class="*:hover:underline">
                 <a href="/ack" class="text-text">acknowledgements</a> •

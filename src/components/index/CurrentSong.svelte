@@ -18,11 +18,7 @@
 </script>
 
 {#if $song !== undefined}
-    <a
-        href={$song?.url}
-        class="text-text hover:!text-green"
-        target="_blank"
-        rel="noopener noreferrer"
+    <a href={$song?.url} class="text-text hover:!text-green" target="_blank"
         >{$song?.artist} - {$song?.name}
     </a>
 {:else}

@@ -9,7 +9,13 @@ import Icon from "@/components/Icon.astro";
 import Cat from "@/components/index/Cat.svelte";
 import CurrentSong from "@/components/index/CurrentSong.svelte";
 import Donation from "@/components/index/Donation.svelte";
-import { DISCORD_ID, HOMESERVER, SIGNAL_URL, USERNAMES } from "@/consts";
+import {
+    DISCORD_ID,
+    HOMESERVER,
+    REPO_URL,
+    SIGNAL_URL,
+    USERNAMES,
+} from "@/consts";
 import head from "@/content/images/head.png";
 import Layout from "@/Layout.astro";
 
@@ -56,7 +62,7 @@ export const prerender = true;
             <a href={`https://${HOMESERVER}`}>redstone.observer</a> including my
             own GitLab instance. You can find the source to this website on
             <a href=`https://git.${HOMESERVER}`>git.redstone.observer</a> @
-            <a href=`https://git.${HOMESERVER}/newt/website`>newt/website</a>.
+            <a href={REPO_URL}>newt/website</a>.
 
             <ul class="*:flex *:items-center *:gap-2 my-2 *:mb-1 select-none">
                 <li>

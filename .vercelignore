@@ -5,3 +5,4 @@
 eslint.config.ts
 pnpm-workspace.yaml
 dist
+readme.md
