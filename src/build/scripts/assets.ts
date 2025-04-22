@@ -42,14 +42,14 @@ head.resize(32, 32);
 sharpIco.sharpsToIco([head], "public/favicon.ico");
 
 // skin
-const skin = await downloadImage(`${BASE.CRAFATAR}/skins/${UUID}`);
+const skin = await downloadImage(`${BASE.VISAGE}/processedskin/${UUID}`);
 await saveImage(skin, "public/mc/skin.png");
 
 // skin render
 const skinRender = await downloadImage(
-    `${BASE.VISAGE}/frontfull/832/${UUID}.png`,
+    `${BASE.VISAGE}/frontfull/832/${UUID}.webp?no=ears`,
 );
-await saveImage(skinRender, "public/mc/render.png");
+await saveImage(skinRender, "public/mc/render.webp ");
 
 // cape
 const capeUrl = await fetch(`${BASE.CAPES}/load/${UUID}/optifine`)

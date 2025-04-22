@@ -19,8 +19,8 @@
         | "tlauncher";
     export interface Props
         extends Omit<
-            Omit<Partial<SkinViewerOptions>, "enableControls">,
-            "cape"
+            Partial<SkinViewerOptions>,
+            "enableControls" | "cape" | "renderPaused"
         > {
         cape?: false | CapeSource;
         controls?: Controls;
@@ -39,14 +39,16 @@
         walking = false,
         ...options
     }: Props = $props();
-    console.log(controls);
+    const width = (height / 832) * 512;
     const isNewt = uuid === UUID;
     const render = isNewt
         ? "/mc/render.png"
-        : `${BASE.VISAGE}/frontfull/${height}/${UUID}.png`;
+        : `${BASE.VISAGE}/frontfull/${height}/${uuid}.webp?no=ears`;
+
     // svelte-ignore non_reactive_update
     let canvas: HTMLCanvasElement;
     const webgl = isWebGL();
+    let loading = $state(webgl);
 
     if (webgl) {
         $effect(() => {
@@ -69,9 +71,11 @@
                     nameTag: new NameTagObject(username, {
                         font: "24px Minecraft",
                     }),
+                    renderPaused: true,
                     skin: isNewt
                         ? "/mc/skin.png"
                         : `${BASE.CRAFATAR}/skins/${uuid}`,
+                    width,
                     zoom: 0.75,
                     ...options,
                 });
@@ -90,18 +94,32 @@
                 if (!isControlEnabled(Controls.Zoom, controls)) {
                     viewer.controls.enableZoom = false;
                 }
+
+                function render() {
+                    viewer.render();
+                    if (loading) loading = false;
+                    requestAnimationFrame(render);
+                }
+
+                render();
             })();
         });
     }
 </script>
 
 {#if webgl}
-    <canvas bind:this={canvas}></canvas>
-{:else}
+    <canvas bind:this={canvas} class={loading ? "hidden" : ""}></canvas>
+{/if}
+
+{#if !webgl || loading}
     <figure class="flex flex-col items-center text-center">
-        <img src={render} alt={username} {height} class="block" />
+        <img src={render} alt={username} {height} {width} class="block" />
         <figcaption class="mt-4 text-subtext0 text-sm">
-            If you enable WebGL this render will become interactive!
+            {#if !webgl}
+                If you enable WebGL this render will become interactive!
+            {:else}
+                Loading skin renderer...
+            {/if}
         </figcaption>
     </figure>
 {/if}

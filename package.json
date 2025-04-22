@@ -9,8 +9,8 @@
         "build": "pnpm assets && astro build",
         "preview": "PREVIEW=1 astro build && PREVIEW=1 astro preview",
         "astro": "astro",
-        "lint": "eslint src/**/*.{astro,ts,svelte} *.{mjs,ts}",
-        "format": "prettier src/**/*.{astro,ts,svelte,css} *.{mjs,ts,config.ts} --write",
+        "lint": "eslint src/**/*.{astro,ts,svelte,d.ts} *.{mjs,ts}",
+        "format": "prettier src/**/*.{astro,ts,svelte,css,d.ts} *.{mjs,ts,config.ts} --write",
         "prepare": "husky",
         "assets": "tsx src/build/scripts/assets.ts",
         "ack": "tsx src/build/scripts/ack/index.ts"
