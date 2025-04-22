@@ -77,7 +77,7 @@ const description = data.description ? marked(data.description) : "";
                 <Icon name="lucide:clock" class="size-4" />
             </li>
             <li class="flex items-center gap-1.5">
-                <Views client:idle {id} />
+                <Views client:load={featured} client:idle={!featured} {id} />
                 <Icon name="lucide:eye" class="size-4" />
             </li>
         </ul>

@@ -49,6 +49,6 @@ export const DUMMY_DONATION: Donation = {
  * Umami analytics configuration
  */
 export const UMAMI = {
-    ID: "d524f4e3-ebaf-4b95-9de7-b0ac8961736f",
+    ID: "6a6ffbf0-1a0b-4e5a-a3bd-529120b4ff20",
     URL: "https://analytics.redstone.observer",
 };

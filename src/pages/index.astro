@@ -74,29 +74,30 @@ const song = await fetchApi<Song>("song", Astro);
                 </li>
             </ul>
         </p>
-        <div>
-            <Heading slug="contact">Get in touch</Heading>
-            <p>
-                I will respond quickest on
-                <Icon name="ic:baseline-discord" class="inline-block" />, but
-                you can reach me through any of the following:
-            </p>
-            <ul class="mt-2 *:mb-1">
-                <li>
-                    <Icon name="ic:baseline-discord" class="hover:text-mauve" />
-                    <a
-                        href={`https://discord.com/users/${DISCORD_ID}`}
-                        class="text-text"
-                    >
-                        {USERNAMES.DISCORD}
-                    </a>
-                </li>
-                <li>
-                    <Icon name="simple-icons:signal" class="hover:text-blue" />
-                    <a href={SIGNAL_URL} class="text-text">{USERNAMES.SIGNAL}</a
-                    >
-                </li>
-            </ul>
-        </div>
+    </div>
+    <div>
+        <Heading slug="contact">Get in touch</Heading>
+        <p>
+            I will respond quickest on
+            <Icon
+                name="ic:baseline-discord"
+                class="inline-block hover:text-mauve"
+            />, but you can reach me through any of the following:
+        </p>
+        <ul class="mt-2 *:mb-1">
+            <li>
+                <Icon name="ic:baseline-discord" class="hover:text-mauve" />
+                <a
+                    href={`https://discord.com/users/${DISCORD_ID}`}
+                    class="text-text"
+                >
+                    {USERNAMES.DISCORD}
+                </a>
+            </li>
+            <li>
+                <Icon name="simple-icons:signal" class="hover:text-blue" />
+                <a href={SIGNAL_URL} class="text-text">{USERNAMES.SIGNAL}</a>
+            </li>
+        </ul>
     </div>
 </Layout>
