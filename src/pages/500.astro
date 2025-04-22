@@ -1,0 +1,16 @@
+---
+import image from "@/content/images/error/500.webp";
+import Error from "@/Error.astro";
+
+interface Props {
+    error: unknown;
+}
+
+const { error } = Astro.props;
+let message = "Internal server error";
+if (error instanceof Error) {
+    message += `: ${(error as Error).message}`;
+}
+---
+
+<Error code={500} {image} {message} />

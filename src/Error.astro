@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+
+import Underline from "@/components/Underline.astro";
+import Layout from "@/Layout.astro";
+
+interface Props {
+    code: number;
+    image: ImageMetadata;
+    message: string;
+}
+const { code, image, message } = Astro.props;
+---
+
+<Layout class="items-center gap-4 text-center">
+    <Image src={image} alt={`The http.cat for ${code}`} class="w-auto h-84" />
+    <div>
+        <h1 class="mb-1 font-bold text-4xl">
+            <Underline>Error {code}</Underline>
+        </h1>
+        <p class="text-lg">
+            {message}.
+        </p>
+    </div>
+    <a href="/" class="text-lg">Go back home</a>
+</Layout>
