@@ -32,7 +32,7 @@ const jetbrainsMono = {
         "node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff",
     ),
 };
-const head = (await fs.readFile(`src/images/head.png`)).toString("base64");
+const head = (await fs.readFile(`content/images/head.png`)).toString("base64");
 
 export async function getStaticPaths() {
     const posts = await getPosts(false);

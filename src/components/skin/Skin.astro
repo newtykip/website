@@ -1,0 +1,39 @@
+---
+import "@south-paw/typeface-minecraft";
+
+import SkinRenderer, {
+    type Props,
+} from "@/components/skin/SkinRenderer.svelte";
+import { UUID } from "@/consts";
+
+/**
+ * Skin controls for the skin viewer
+ */
+export enum Controls {
+    RotateVert = 1 << 0,
+    RotateHori = 1 << 1,
+    Zoom = 1 << 2,
+
+    Rotate = RotateVert | RotateHori,
+}
+
+export function isControlEnabled(control: Controls, check?: Controls) {
+    if (check === undefined) return true;
+    return (check & control) === control;
+}
+
+const { uuid = UUID, ...props } = Astro.props as Omit<
+    Omit<Props, "uuid">,
+    "username"
+> & {
+    uuid?: string;
+};
+
+const username = await fetch(
+    `https://api.minecraftservices.com/minecraft/profile/lookup/${uuid}`,
+)
+    .then((res) => res.json())
+    .then((data) => data.name as string);
+---
+
+<SkinRenderer client:only="svelte" {username} {uuid} {...props} />

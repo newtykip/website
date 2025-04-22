@@ -4,6 +4,7 @@ import partytown from "@astrojs/partytown";
 import svelte from "@astrojs/svelte";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
+import { threeMinifier } from "@yushijinhun/three-minifier-rollup";
 import { defineConfig } from "astro/config";
 import autoImport from "astro-auto-import";
 import icon from "astro-icon";
@@ -42,7 +43,7 @@ export default defineConfig({
         css: {
             transformer: "lightningcss",
         },
-        plugins: [tailwindcss()],
+        plugins: [tailwindcss(), threeMinifier()],
         server: {
             allowedHosts: [".ngrok-free.app"],
         },

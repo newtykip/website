@@ -2,12 +2,7 @@ import fs from "fs/promises";
 import sharp from "sharp";
 import sharpIco from "sharp-ico";
 
-const UUID = "7e3661236beb48ecb6e147dbd319f41d";
-const BASE = {
-    CAPES: "https://api.capes.dev",
-    CRAFATAR: "https://crafatar.com",
-    VISAGE: "https://vzge.me",
-};
+import { BASE, UUID } from "@/consts/scripts";
 
 /**
  * Fetches a resource and returns it as an ArrayBuffer.
@@ -42,8 +37,7 @@ const head = await downloadImage(
     `${BASE.CRAFATAR}/avatars/${UUID}?overlay&size=256`,
 );
 head.resize(32, 32);
-await saveImage(head, "src/images/head.png");
-head.resize(16, 16);
+await saveImage(head, "content/images/head.png");
 sharpIco.sharpsToIco([head], "public/favicon.ico");
 
 // skin

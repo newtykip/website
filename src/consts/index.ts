@@ -1,5 +1,7 @@
 import type { Donation } from "@/api/donation";
 
+export * from "@/consts/scripts";
+
 /**
  * Site description
  */

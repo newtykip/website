@@ -33,7 +33,7 @@ const rawBlogSchema = z.object({
 type BlogData = z.infer<typeof rawBlogSchema>;
 
 const blog = defineCollection({
-    loader: glob({ base: "./posts", pattern: "**/*.mdx" }),
+    loader: glob({ base: "./content/posts", pattern: "**/*.mdx" }),
     schema: rawBlogSchema
         .refine(...requireIfPublished<BlogData>("heroAlt"))
         .refine(...requireIfPublished<BlogData>("description")),
